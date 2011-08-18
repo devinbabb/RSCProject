@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/junit.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mina.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xstream.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/pircbot.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/bsh.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mina1.1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mina2.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jmf.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/bsh2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xpp3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hex-string.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mysql-connector.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

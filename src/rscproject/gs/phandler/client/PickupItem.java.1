@@ -1,0 +1,138 @@
+package org.rscdaemon.server.packethandler.client;
+
+import org.rscdaemon.server.packethandler.PacketHandler;
+import org.rscdaemon.server.packetbuilder.loginserver.MiscPacketBuilder;
+import org.rscdaemon.server.model.*;
+import org.rscdaemon.server.net.Packet;
+import org.rscdaemon.server.event.FightEvent;
+import org.rscdaemon.server.event.WalkToPointEvent;
+import org.rscdaemon.server.states.Action;
+import org.apache.mina.common.IoSession;
+
+public class PickupItem implements PacketHandler {
+	/**
+	 * World instance
+	 */
+	public static final World world = World.getWorld();
+
+	public void handlePacket(Packet p, IoSession session) throws Exception {
+		Player player = (Player) session.getAttachment();
+		if(player.isBusy()) {
+			player.resetPath();
+			return;
+		}
+		player.resetAll();
+		Point location = Point.location(p.readShort(), p.readShort());
+		int id = p.readShort();
+		final ActiveTile tile = world.getTile(location);
+		final Item item = getItem(id, tile, player);
+		if(item == null) {
+			player.setSuspiciousPlayer(true);
+			player.resetPath();
+			return;
+		}
+		if(item.getDef().isMembers()) {
+			player.getActionSender().sendMessage("This item is a p2p item and cannot be picked up.");
+			return;
+		}
+		player.setStatus(Action.TAKING_GITEM);
+		world.getDelayedEventHandler().add(new WalkToPointEvent(player, location, 1, false) {
+			public void arrived() {
+				if(owner.isBusy() || owner.isRanging() || !tile.hasItem(item) || !owner.nextTo(item) || owner.getStatus() != Action.TAKING_GITEM) {
+					return;
+				}
+				if(item.getID() == 501 && item.getX() == 333 && item.getY() == 434) {
+					owner.getActionSender().sendMessage("A force stops you from taking the holy wine.");
+					return;
+				}
+				if(item.getID() == 23) {
+					owner.getActionSender().sendMessage("I can't pick it up!");
+					owner.getActionSender().sendMessage("I need a pot to hold it in.");
+					return;
+				}
+
+				int [] Rares = {576,577,578,579,580,581,828,831,832,1278,593,594,795};
+				boolean pickedUpRare = false;
+				if(item.getAmount() > 99999)
+					pickedUpRare = true;
+
+				for(int i=0; i < Rares.length; i++) {
+					if (item.getID() == Rares[i])
+						pickedUpRare = true;
+				}
+				owner.resetAll();
+				InvItem invItem = new InvItem(item.getID(), item.getAmount());
+				if(!owner.getInventory().canHold(invItem)) {
+					owner.getActionSender().sendMessage("You cannot pickup this item, your inventory is full!");
+					return;
+				}
+				if(invItem.getID() == 59 && invItem.getX() == 106 && invItem.getY() == 1476) {
+
+				}
+
+				
+
+
+				try {
+					if(item.getID() == 59 && item.getX() == 106 && item.getY() == 1476) {
+
+						Npc n = world.getNpc(37, 103, 107, 1476, 1479);
+						owner.getActionSender().sendMessage(n.getDef().name);
+						if(n != null && !n.inCombat()) {
+							owner.informOfNpcMessage(new ChatMessage(n, "Nobody steals from this gang!", owner));
+							n.resetPath();
+							owner.resetPath();
+							owner.resetAll();
+							owner.setStatus(Action.FIGHTING_MOB);
+							owner.getActionSender().sendMessage("You are under attack!");
+
+							n.setLocation(owner.getLocation(), true);
+							for(Player p : n.getViewArea().getPlayersInView()) {
+								p.removeWatchedNpc(n);
+							}
+
+							owner.setBusy(true);
+							owner.setSprite(9);
+							owner.setOpponent(n);
+							owner.setCombatTimer();
+
+							n.setBusy(true);
+							n.setSprite(8);
+							n.setOpponent(owner);
+							n.setCombatTimer();
+							FightEvent fighting = new FightEvent(owner, n, true);
+							fighting.setLastRun(0);
+							world.getDelayedEventHandler().add(fighting);
+						}
+					}
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+
+
+				if(pickedUpRare) {
+					//Code goes here if they picked up some BS items.
+					MiscPacketBuilder loginServer = world.getServer().getLoginConnector().getActionSender();
+					final long droppedby = item.droppedby();
+					final long playerLong = org.rscdaemon.server.util.DataConversions.usernameToHash(owner.getUsername());
+					loginServer.tradeLog(droppedby, playerLong, item.getID(), item.getAmount(), 3);
+				}
+
+				world.unregisterItem(item);
+				owner.getActionSender().sendSound("takeobject");
+				owner.getInventory().add(invItem);
+				owner.getActionSender().sendInventory();
+			}
+		});
+	}
+
+	private Item getItem(int id, ActiveTile tile, Player player) {
+		for(Item i : tile.getItems()) {
+			if(i.getID() == id && i.visibleTo(player)) {
+				return i;
+			}
+		}
+		return null;
+	}
+
+}

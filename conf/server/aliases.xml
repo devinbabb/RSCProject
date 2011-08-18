@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	<comment>Stores aliases for the XStream engine</comment>
+	<entry key="PacketHandler">rscproject.gs.phandler.PacketHandlerDef</entry>
+	<entry key="NpcHandler">rscproject.gs.npchandler.NpcHandlerDef</entry>
+	
+	<entry key="Point">rscproject.gs.model.Point</entry>
+	<entry key="TelePoint">rscproject.gs.model.TelePoint</entry>
+	
+	<entry key="Shop">rscproject.gs.model.Shop</entry>
+	<entry key="InvItem">rscproject.gs.model.InvItem</entry>
+	
+	<entry key="CerterDef">rscproject.gs.external.CerterDef</entry>
+	<entry key="CertDef">rscproject.gs.external.CertDef</entry>
+
+	<entry key="GameObjectLoc">rscproject.gs.external.GameObjectLoc</entry>
+	<entry key="ItemLoc">rscproject.gs.external.ItemLoc</entry>
+	<entry key="NPCLoc">rscproject.gs.external.NPCLoc</entry>
+	
+	<entry key="TileDef">rscproject.gs.external.TileDef</entry>
+	<entry key="GameObjectDef">rscproject.gs.external.GameObjectDef</entry>
+	<entry key="DoorDef">rscproject.gs.external.DoorDef</entry>
+	<entry key="ItemDef">rscproject.gs.external.ItemDef</entry>
+	<entry key="PrayerDef">rscproject.gs.external.PrayerDef</entry>
+	<entry key="SpellDef">rscproject.gs.external.SpellDef</entry>
+	<entry key="NPCDef">rscproject.gs.external.NPCDef</entry>
+	
+	<entry key="ItemCraftingDef">rscproject.gs.external.ItemCraftingDef</entry>
+	<entry key="ItemHerbSecond">rscproject.gs.external.ItemHerbSecond</entry>
+	<entry key="ItemDartTipDef">rscproject.gs.external.ItemDartTipDef</entry>
+	<entry key="ItemGemDef">rscproject.gs.external.ItemGemDef</entry>
+	<entry key="ItemLogCutDef">rscproject.gs.external.ItemLogCutDef</entry>
+	<entry key="ItemBowStringDef">rscproject.gs.external.ItemBowStringDef</entry>
+	<entry key="ItemArrowHeadDef">rscproject.gs.external.ItemArrowHeadDef</entry>
+	<entry key="FiremakingDef">rscproject.gs.external.FiremakingDef</entry>
+	<entry key="ReqOreDef">rscproject.gs.external.ReqOreDef</entry>
+	<entry key="ItemWieldableDef">rscproject.gs.external.ItemWieldableDef</entry>
+	<entry key="ItemUnIdentHerbDef">rscproject.gs.external.ItemUnIdentHerbDef</entry>
+	<entry key="ItemHerbDef">rscproject.gs.external.ItemHerbDef</entry>
+	<entry key="ItemCookingDef">rscproject.gs.external.ItemCookingDef</entry>
+	<entry key="ItemSmeltingDef">rscproject.gs.external.ItemSmeltingDef</entry>
+	<entry key="ItemSmithingDef">rscproject.gs.external.ItemSmithingDef</entry>
+	<entry key="ObjectMiningDef">rscproject.gs.external.ObjectMiningDef</entry>
+	<entry key="ObjectWoodcuttingDef">rscproject.gs.external.ObjectWoodcuttingDef</entry>
+	<entry key="ObjectFishingDef">rscproject.gs.external.ObjectFishingDef</entry>
+	<entry key="ObjectFishDef">rscproject.gs.external.ObjectFishDef</entry>
+	<entry key="ItemDropDef">rscproject.gs.external.ItemDropDef</entry>
+	<entry key="AgilityDef">rscproject.gs.external.AgilityDef</entry>
+	<entry key="AgilityCourseDef">rscproject.gs.external.AgilityCourseDef</entry>
+</properties>

@@ -1,0 +1,325 @@
+JAVA PROFILE 1.0.1, created Sat Sep 12 05:09:13 2009
+
+Header for -agentlib:hprof (or -Xrunhprof) ASCII Output (JDK 5.0 JVMTI based)
+
+@(#)jvm.hprof.txt	1.5 06/01/28
+
+ Copyright (c) 2006 Sun Microsystems, Inc. All  Rights Reserved.
+
+WARNING!  This file format is under development, and is subject to
+change without notice.
+
+This file contains the following types of records:
+
+THREAD START
+THREAD END      mark the lifetime of Java threads
+
+TRACE           represents a Java stack trace.  Each trace consists
+                of a series of stack frames.  Other records refer to
+                TRACEs to identify (1) where object allocations have
+                taken place, (2) the frames in which GC roots were
+                found, and (3) frequently executed methods.
+
+HEAP DUMP       is a complete snapshot of all live objects in the Java
+                heap.  Following distinctions are made:
+
+                ROOT    root set as determined by GC
+                CLS     classes 
+                OBJ     instances
+                ARR     arrays
+
+SITES           is a sorted list of allocation sites.  This identifies
+                the most heavily allocated object types, and the TRACE
+                at which those allocations occurred.
+
+CPU SAMPLES     is a statistical profile of program execution.  The VM
+                periodically samples all running threads, and assigns
+                a quantum to active TRACEs in those threads.  Entries
+                in this record are TRACEs ranked by the percentage of
+                total quanta they consumed; top-ranked TRACEs are
+                typically hot spots in the program.
+
+CPU TIME        is a profile of program execution obtained by measuring
+                the time spent in individual methods (excluding the time
+                spent in callees), as well as by counting the number of
+                times each method is called. Entries in this record are
+                TRACEs ranked by the percentage of total CPU time. The
+                "count" field indicates the number of times each TRACE 
+                is invoked.
+
+MONITOR TIME    is a profile of monitor contention obtained by measuring
+                the time spent by a thread waiting to enter a monitor.
+                Entries in this record are TRACEs ranked by the percentage
+                of total monitor contention time and a brief description
+                of the monitor.  The "count" field indicates the number of 
+                times the monitor was contended at that TRACE.
+
+MONITOR DUMP    is a complete snapshot of all the monitors and threads in 
+                the System.
+
+HEAP DUMP, SITES, CPU SAMPLES|TIME and MONITOR DUMP|TIME records are generated 
+at program exit.  They can also be obtained during program execution by typing 
+Ctrl-\ (on Solaris) or by typing Ctrl-Break (on Win32).
+
+--------
+
+THREAD START (obj=50000133, id = 200001, name="main", group="main")
+THREAD START (obj=50000133, id = 200005, name="QuestManager.EventHandler", group="main")
+THREAD START (obj=50000133, id = 200006, name="Thread-0", group="main")
+THREAD START (obj=50000133, id = 200007, name="Thread-1", group="main")
+THREAD START (obj=5000055c, id = 200008, name="PooledByteBufferExpirer-0", group="main")
+THREAD START (obj=50000133, id = 200009, name="pool-2-thread-1", group="main")
+THREAD START (obj=50000133, id = 200010, name="Java2D Disposer", group="system")
+THREAD START (obj=50000641, id = 200011, name="Thread-2", group="main")
+THREAD START (obj=50000133, id = 200012, name="pool-2-thread-2", group="main")
+THREAD START (obj=50000133, id = 200013, name="pool-2-thread-3", group="main")
+THREAD START (obj=50000133, id = 200014, name="pool-3-thread-1", group="main")
+THREAD END (id = 200001)
+THREAD START (obj=50000133, id = 200015, name="DestroyJavaVM", group="main")
+THREAD START (obj=50000133, id = 200016, name="pool-2-thread-4", group="main")
+THREAD START (obj=50000133, id = 200017, name="pool-2-thread-5", group="main")
+THREAD START (obj=50000133, id = 200018, name="pool-3-thread-2", group="main")
+THREAD START (obj=50000133, id = 200019, name="pool-2-thread-6", group="main")
+THREAD START (obj=50000133, id = 200020, name="pool-2-thread-7", group="main")
+THREAD START (obj=50000133, id = 200021, name="pool-2-thread-8", group="main")
+THREAD START (obj=50000133, id = 200022, name="pool-2-thread-9", group="main")
+THREAD START (obj=50000133, id = 200023, name="pool-2-thread-10", group="main")
+THREAD START (obj=50000133, id = 200024, name="Thread-3", group="system")
+THREAD END (id = 200024)
+THREAD END (id = 200011)
+TRACE 300477:
+	sun.nio.ch.EPollArrayWrapper.epollWait(EPollArrayWrapper.java:Unknown line)
+	sun.nio.ch.EPollArrayWrapper.poll(EPollArrayWrapper.java:215)
+	sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:65)
+	sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:69)
+TRACE 300315:
+	sun.misc.Unsafe.objectFieldOffset(Unsafe.java:Unknown line)
+	com.thoughtworks.xstream.converters.reflection.Sun14ReflectionProvider.write(Sun14ReflectionProvider.java:73)
+	com.thoughtworks.xstream.converters.reflection.Sun14ReflectionProvider.writeField(Sun14ReflectionProvider.java:67)
+	com.thoughtworks.xstream.converters.reflection.ReflectionConverter.unmarshal(ReflectionConverter.java:106)
+TRACE 300355:
+	java.util.zip.Inflater.inflateBytes(Inflater.java:Unknown line)
+	java.util.zip.Inflater.inflate(Inflater.java:223)
+	java.util.zip.InflaterInputStream.read(InflaterInputStream.java:135)
+	java.io.BufferedInputStream.read1(BufferedInputStream.java:256)
+TRACE 300363:
+	rscproject.gs.io.WorldLoader.loadWorld(WorldLoader.java:126)
+	rscproject.gs.model.World.getWorld(World.java:115)
+	rscproject.gs.Instance.getWorld(Instance.java:25)
+	rscproject.config.Constants$GameServer.<clinit>(Constants.java:48)
+TRACE 300050:
+	java.lang.ClassLoader.defineClass1(ClassLoader.java:Unknown line)
+	java.lang.ClassLoader.defineClass(ClassLoader.java:621)
+	java.security.SecureClassLoader.defineClass(SecureClassLoader.java:124)
+	java.net.URLClassLoader.defineClass(URLClassLoader.java:260)
+TRACE 300337:
+	com.thoughtworks.xstream.converters.reflection.Sun14ReflectionProvider.newInstance(Sun14ReflectionProvider.java:41)
+	com.thoughtworks.xstream.converters.reflection.ReflectionConverter.instantiateNewInstance(ReflectionConverter.java:148)
+	com.thoughtworks.xstream.converters.reflection.ReflectionConverter.unmarshal(ReflectionConverter.java:90)
+	com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:38)
+TRACE 300318:
+	org.xmlpull.mxp1.MXParser.parseStartTag(MXParser.java:1708)
+	org.xmlpull.mxp1.MXParser.nextImpl(MXParser.java:1127)
+	org.xmlpull.mxp1.MXParser.next(MXParser.java:1093)
+	com.thoughtworks.xstream.io.xml.XppReader.pullNextEvent(XppReader.java:43)
+TRACE 300330:
+	java.lang.String.intern(String.java:Unknown line)
+	com.thoughtworks.xstream.converters.basic.StringConverter.fromString(StringConverter.java:19)
+	com.thoughtworks.xstream.converters.basic.AbstractBasicConverter.unmarshal(AbstractBasicConverter.java:33)
+	com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:38)
+TRACE 300567:
+	rscproject.gs.model.ViewArea.getViewedArea(ViewArea.java:110)
+	rscproject.gs.model.Npc.findVictim(Npc.java:318)
+	rscproject.gs.model.Npc.updatePosition(Npc.java:518)
+	rscproject.gs.core.ClientUpdater.updateNpcPositions(ClientUpdater.java:196)
+TRACE 300327:
+	java.lang.Object.getClass(Object.java:Unknown line)
+	com.thoughtworks.xstream.converters.reflection.ReflectionConverter.unmarshal(ReflectionConverter.java:97)
+	com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:38)
+	com.thoughtworks.xstream.core.ReferenceByXPathUnmarshaller.convertAnother(ReferenceByXPathUnmarshaller.java:39)
+TRACE 300361:
+	rscproject.gs.io.WorldLoader.loadSection(WorldLoader.java:43)
+	rscproject.gs.io.WorldLoader.loadWorld(WorldLoader.java:126)
+	rscproject.gs.model.World.getWorld(World.java:115)
+	rscproject.gs.Instance.getWorld(Instance.java:25)
+TRACE 300364:
+	rscproject.gs.model.Sector.unpack(Sector.java:25)
+	rscproject.gs.io.WorldLoader.loadSection(WorldLoader.java:43)
+	rscproject.gs.io.WorldLoader.loadWorld(WorldLoader.java:126)
+	rscproject.gs.model.World.getWorld(World.java:115)
+TRACE 300368:
+	java.util.zip.InflaterInputStream.<init>(InflaterInputStream.java:71)
+	java.util.zip.ZipFile$1.<init>(ZipFile.java:212)
+	java.util.zip.ZipFile.getInputStream(ZipFile.java:212)
+	java.util.zip.ZipFile.getInputStream(ZipFile.java:180)
+TRACE 300326:
+	java.lang.Object.getClass(Object.java:Unknown line)
+	com.thoughtworks.xstream.converters.reflection.ReflectionConverter.unmarshal(ReflectionConverter.java:100)
+	com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:38)
+	com.thoughtworks.xstream.core.ReferenceByXPathUnmarshaller.convertAnother(ReferenceByXPathUnmarshaller.java:39)
+TRACE 300343:
+	java.util.zip.Inflater.inflateBytes(Inflater.java:Unknown line)
+	java.util.zip.Inflater.inflate(Inflater.java:223)
+	java.util.zip.InflaterInputStream.read(InflaterInputStream.java:135)
+	java.util.zip.GZIPInputStream.read(GZIPInputStream.java:92)
+TRACE 300386:
+	java.util.HashMap.transfer(HashMap.java:484)
+	java.util.HashMap.resize(HashMap.java:463)
+	java.util.HashMap.addEntry(HashMap.java:755)
+	java.util.HashMap.put(HashMap.java:385)
+TRACE 300392:
+	rscproject.gs.io.WorldLoader.loadObjects(WorldLoader.java:143)
+	rscproject.gs.Server.main(Server.java:51)
+TRACE 300307:
+	sun.misc.Unsafe.defineClass(Unsafe.java:Unknown line)
+	sun.reflect.ClassDefiner.defineClass(ClassDefiner.java:45)
+	sun.reflect.MethodAccessorGenerator$1.run(MethodAccessorGenerator.java:381)
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+TRACE 300310:
+	java.lang.Object.getClass(Object.java:Unknown line)
+	com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider.getFieldType(PureJavaReflectionProvider.java:130)
+	com.thoughtworks.xstream.converters.reflection.ReflectionConverter.determineType(ReflectionConverter.java:182)
+	com.thoughtworks.xstream.converters.reflection.ReflectionConverter.unmarshal(ReflectionConverter.java:102)
+TRACE 300360:
+	java.util.zip.Inflater.init(Inflater.java:Unknown line)
+	java.util.zip.Inflater.<init>(Inflater.java:83)
+	java.util.zip.ZipFile.getInflater(ZipFile.java:266)
+	java.util.zip.ZipFile.getInputStream(ZipFile.java:212)
+TRACE 300394:
+	rscproject.gs.io.WorldLoader.loadObjects(WorldLoader.java:158)
+	rscproject.gs.Server.main(Server.java:51)
+TRACE 300568:
+	rscproject.gs.model.PathHandler.getNextCoords(PathHandler.java:78)
+	rscproject.gs.model.PathHandler.setNextPosition(PathHandler.java:219)
+	rscproject.gs.model.PathHandler.updatePosition(PathHandler.java:258)
+	rscproject.gs.model.Mob.updatePosition(Mob.java:308)
+TRACE 300051:
+	java.lang.ClassLoader.findBootstrapClass(ClassLoader.java:Unknown line)
+	java.lang.ClassLoader.findBootstrapClass0(ClassLoader.java:892)
+	java.lang.ClassLoader.loadClass(ClassLoader.java:302)
+	java.lang.ClassLoader.loadClass(ClassLoader.java:300)
+TRACE 300288:
+	java.util.zip.ZipFile.getEntry(ZipFile.java:Unknown line)
+	java.util.zip.ZipFile.getEntry(ZipFile.java:149)
+	java.util.jar.JarFile.getEntry(JarFile.java:206)
+	java.util.jar.JarFile.getJarEntry(JarFile.java:189)
+TRACE 300319:
+	java.lang.Object.getClass(Object.java:Unknown line)
+	com.thoughtworks.xstream.converters.reflection.Sun14ReflectionProvider.writeField(Sun14ReflectionProvider.java:67)
+	com.thoughtworks.xstream.converters.reflection.ReflectionConverter.unmarshal(ReflectionConverter.java:106)
+	com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:38)
+TRACE 300329:
+	java.util.Arrays.copyOf(Arrays.java:2882)
+	java.lang.AbstractStringBuilder.expandCapacity(AbstractStringBuilder.java:100)
+	java.lang.AbstractStringBuilder.append(AbstractStringBuilder.java:597)
+	java.lang.StringBuffer.append(StringBuffer.java:329)
+TRACE 300332:
+	com.thoughtworks.xstream.core.util.ClassStack.push(ClassStack.java:13)
+	com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:37)
+	com.thoughtworks.xstream.core.ReferenceByXPathUnmarshaller.convertAnother(ReferenceByXPathUnmarshaller.java:39)
+	com.thoughtworks.xstream.converters.reflection.ReflectionConverter.unmarshal(ReflectionConverter.java:103)
+TRACE 300335:
+	java.util.ArrayList.<init>(ArrayList.java:112)
+	java.util.ArrayList.<init>(ArrayList.java:119)
+	com.thoughtworks.xstream.converters.collections.ArrayConverter.unmarshal(ArrayConverter.java:48)
+	com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:38)
+TRACE 300336:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	org.xmlpull.mxp1.MXParser.parseStartTag(MXParser.java:1742)
+	org.xmlpull.mxp1.MXParser.nextImpl(MXParser.java:1127)
+	org.xmlpull.mxp1.MXParser.next(MXParser.java:1093)
+TRACE 300344:
+	java.util.HashMap.<init>(HashMap.java:209)
+	java.util.HashSet.<init>(HashSet.java:86)
+	com.thoughtworks.xstream.converters.reflection.ReflectionConverter$SeenFields.<init>(ReflectionConverter.java:154)
+	com.thoughtworks.xstream.converters.reflection.ReflectionConverter$SeenFields.<init>(ReflectionConverter.java:152)
+TRACE 300352:
+	rscproject.gs.model.Sector.<init>(Sector.java:44)
+	rscproject.gs.model.Sector.unpack(Sector.java:25)
+	rscproject.gs.io.WorldLoader.loadSection(WorldLoader.java:43)
+	rscproject.gs.io.WorldLoader.loadWorld(WorldLoader.java:126)
+TRACE 300356:
+	rscproject.gs.io.WorldLoader.loadSection(WorldLoader.java:63)
+	rscproject.gs.io.WorldLoader.loadWorld(WorldLoader.java:126)
+	rscproject.gs.model.World.getWorld(World.java:115)
+	rscproject.gs.Instance.getWorld(Instance.java:25)
+TRACE 300359:
+	java.lang.ref.Reference$ReferenceHandler.run(Reference.java:109)
+TRACE 300369:
+	rscproject.gs.io.WorldLoader.loadSection(WorldLoader.java:88)
+	rscproject.gs.io.WorldLoader.loadWorld(WorldLoader.java:126)
+	rscproject.gs.model.World.getWorld(World.java:115)
+	rscproject.gs.Instance.getWorld(Instance.java:25)
+TRACE 300371:
+	rscproject.gs.io.WorldLoader.loadSection(WorldLoader.java:73)
+	rscproject.gs.io.WorldLoader.loadWorld(WorldLoader.java:126)
+	rscproject.gs.model.World.getWorld(World.java:115)
+	rscproject.gs.Instance.getWorld(Instance.java:25)
+TRACE 300388:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.nio.HeapByteBuffer.compact(HeapByteBuffer.java:204)
+	sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:250)
+	sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:306)
+TRACE 300549:
+	java.io.UnixFileSystem.createFileExclusively(UnixFileSystem.java:Unknown line)
+	java.io.File.checkAndCreate(File.java:1704)
+	java.io.File.createTempFile(File.java:1792)
+	java.awt.Font$1.run(Font.java:841)
+TRACE 300561:
+	java.lang.System.currentTimeMillis(System.java:Unknown line)
+	rscproject.gs.model.Npc.updatePosition(Npc.java:516)
+	rscproject.gs.core.ClientUpdater.updateNpcPositions(ClientUpdater.java:196)
+	rscproject.gs.core.ClientUpdater.updateClients(ClientUpdater.java:65)
+TRACE 300563:
+	sun.misc.Unsafe.compareAndSwapLong(Unsafe.java:Unknown line)
+	java.util.concurrent.atomic.AtomicLong.compareAndSet(AtomicLong.java:121)
+	java.util.Random.next(Random.java:139)
+	java.util.Random.nextInt(Random.java:253)
+TRACE 300593:
+	java.lang.Shutdown.halt0(Shutdown.java:Unknown line)
+	java.lang.Shutdown.halt(Shutdown.java:95)
+	java.lang.Shutdown.exit(Shutdown.java:169)
+	java.lang.Runtime.exit(Runtime.java:90)
+CPU SAMPLES BEGIN (total = 13925) Sat Sep 12 05:10:00 2009
+rank   self  accum   count trace method
+   1 97.51% 97.51%   13578 300477 sun.nio.ch.EPollArrayWrapper.epollWait
+   2  0.65% 98.15%      90 300315 sun.misc.Unsafe.objectFieldOffset
+   3  0.13% 98.28%      18 300355 java.util.zip.Inflater.inflateBytes
+   4  0.11% 98.40%      16 300363 rscproject.gs.io.WorldLoader.loadWorld
+   5  0.09% 98.49%      13 300050 java.lang.ClassLoader.defineClass1
+   6  0.07% 98.56%      10 300337 com.thoughtworks.xstream.converters.reflection.Sun14ReflectionProvider.newInstance
+   7  0.05% 98.61%       7 300318 org.xmlpull.mxp1.MXParser.parseStartTag
+   8  0.04% 98.66%       6 300330 java.lang.String.intern
+   9  0.04% 98.70%       6 300567 rscproject.gs.model.ViewArea.getViewedArea
+  10  0.04% 98.74%       5 300327 java.lang.Object.getClass
+  11  0.04% 98.77%       5 300361 rscproject.gs.io.WorldLoader.loadSection
+  12  0.04% 98.81%       5 300364 rscproject.gs.model.Sector.unpack
+  13  0.04% 98.84%       5 300368 java.util.zip.InflaterInputStream.<init>
+  14  0.03% 98.87%       4 300326 java.lang.Object.getClass
+  15  0.03% 98.90%       4 300343 java.util.zip.Inflater.inflateBytes
+  16  0.03% 98.93%       4 300386 java.util.HashMap.transfer
+  17  0.03% 98.96%       4 300392 rscproject.gs.io.WorldLoader.loadObjects
+  18  0.02% 98.98%       3 300307 sun.misc.Unsafe.defineClass
+  19  0.02% 99.00%       3 300310 java.lang.Object.getClass
+  20  0.02% 99.02%       3 300360 java.util.zip.Inflater.init
+  21  0.02% 99.04%       3 300394 rscproject.gs.io.WorldLoader.loadObjects
+  22  0.02% 99.07%       3 300568 rscproject.gs.model.PathHandler.getNextCoords
+  23  0.01% 99.08%       2 300051 java.lang.ClassLoader.findBootstrapClass
+  24  0.01% 99.10%       2 300288 java.util.zip.ZipFile.getEntry
+  25  0.01% 99.11%       2 300319 java.lang.Object.getClass
+  26  0.01% 99.12%       2 300329 java.util.Arrays.copyOf
+  27  0.01% 99.14%       2 300332 com.thoughtworks.xstream.core.util.ClassStack.push
+  28  0.01% 99.15%       2 300335 java.util.ArrayList.<init>
+  29  0.01% 99.17%       2 300336 java.lang.System.arraycopy
+  30  0.01% 99.18%       2 300344 java.util.HashMap.<init>
+  31  0.01% 99.20%       2 300352 rscproject.gs.model.Sector.<init>
+  32  0.01% 99.21%       2 300356 rscproject.gs.io.WorldLoader.loadSection
+  33  0.01% 99.22%       2 300359 java.lang.ref.Reference$ReferenceHandler.run
+  34  0.01% 99.24%       2 300369 rscproject.gs.io.WorldLoader.loadSection
+  35  0.01% 99.25%       2 300371 rscproject.gs.io.WorldLoader.loadSection
+  36  0.01% 99.27%       2 300388 java.lang.System.arraycopy
+  37  0.01% 99.28%       2 300549 java.io.UnixFileSystem.createFileExclusively
+  38  0.01% 99.30%       2 300561 java.lang.System.currentTimeMillis
+  39  0.01% 99.31%       2 300563 sun.misc.Unsafe.compareAndSwapLong
+  40  0.01% 99.32%       2 300593 java.lang.Shutdown.halt0
+CPU SAMPLES END

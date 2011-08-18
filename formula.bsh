@@ -1,0 +1,71 @@
+import rsca.config.Formulae;
+import rsca.gs.tools.DataConversions;
+
+this.interpreter.getNameSpace().importClass("rsca.gs.model.Npc");
+this.interpreter.getNameSpace().importClass("rsca.gs.tools.DataConversions");
+
+int max = Formulae.maxHit(attacker.getStrength(), attacker.getWeaponPowerPoints(), attacker.isPrayerActivated(1), attacker.isPrayerActivated(4), attacker.isPrayerActivated(10), Formulae.styleBonus(attacker, 2));
+			int newAtt = (int)
+			(
+					Formulae.addPrayers(attacker.isPrayerActivated(2), attacker.isPrayerActivated(5), attacker.isPrayerActivated(11))
+					*
+					(attacker.getAttack() / 0.8D)
+					+
+					((DataConversions.random(0,4) == 0 ? attacker.getWeaponPowerPoints() : attacker.getWeaponAimPoints()) / 3D)
+					+
+					(attacker.getCombatStyle() == 1 && DataConversions.random(0,2) == 0 ? 4 : 0)
+					+
+					(Formulae.styleBonus(attacker, 0) * 2)
+			);
+			int newDef = (int)
+			(
+					Formulae.addPrayers(defender.isPrayerActivated(0), defender.isPrayerActivated(3), defender.isPrayerActivated(9))
+					*
+					(defender.getDefense() * 1.3D)
+					+
+					(defender.getArmourPoints() / 1D)
+					+
+					(defender.getStrength() / 4D)
+					+
+					(Formulae.styleBonus(defender, 1) * 2)
+			);
+
+			int hitChance = DataConversions.random(0, 100) + (newAtt - newDef);
+			if(attacker instanceof Npc) { hitChance-=5; }
+			if(DataConversions.random(0, 100) <= 10) { hitChance += 5; }
+			if(hitChance > (defender instanceof Npc ? 40 : 50))
+			{
+				int maxProb = 5; // 5%
+				int nearMaxProb = 7; // 10%
+				int avProb = 73; // 70%
+				int lowHit = 10; // 15%
+
+				// Probablities are shifted up/down based on armour
+				int shiftValue = (int)Math.round(defender.getArmourPoints() * 0.02D);
+				maxProb -= shiftValue;
+				nearMaxProb -= (int)Math.round(shiftValue * 1.5);
+				avProb -= (int)Math.round(shiftValue * 2.0);
+				lowHit += (int)Math.round(shiftValue * 3.5);
+
+				int hitRange = DataConversions.random(0, 100);
+
+				if(hitRange >= (100 - maxProb))
+				{
+					return max;
+				}
+				else if(hitRange >= (100 - nearMaxProb))
+				{
+					return DataConversions.roundUp(Math.abs((max - (max * (DataConversions.random(0, 10) * 0.01D)))));
+				}
+				else if(hitRange >= (100 - avProb))
+				{
+					int newMax = (int)DataConversions.roundUp((max - (max * 0.1D)));
+					return DataConversions.roundUp(Math.abs((newMax - (newMax * (DataConversions.random(0, 50) * 0.01D)))));
+				}
+				else
+				{
+					int newMax = (int)DataConversions.roundUp((max - (max * 0.5D)));
+					return DataConversions.roundUp(Math.abs((newMax - (newMax * (DataConversions.random(0, 95) * 0.01D)))));
+				}
+			}
+			return 0;

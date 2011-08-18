@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>RSC Project - Quests System</title>
+<link rel="stylesheet" type="text/css" href="styles/style.css" />
+<link rel="stylesheet" type="text/css" href="styles/print.css" media="print" />
+<style type="text/css">
+html { /* Adds a scrollbar to EVERY page, no matter how short its height */
+	height: 100%; 
+	margin-bottom: 1px; 
+}
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #333333;
+	font-size: 0.9em;
+	line-height: 1.3em;
+	background-color:#333333;
+}
+h2 {
+	border-bottom: 1px solid #999;
+	font-weight: normal;
+	padding-bottom: 3px;
+}
+dt {
+	font-weight: bold;
+}
+dd {
+	margin-bottom: 10px;
+}
+ul {
+	list-style-type: square;
+}
+a:link, a:visited {
+	color: #0000ff;
+}
+a:focus, a:hover, a:active {
+	color: #ff0000;
+}
+.itemname {
+	font-weight:bold;
+	color:#CC6600;
+}
+.code {
+	font-weight:bold;
+	background-color: #000000;
+	color:#FFFFFF;
+}
+#main {
+	margin-left:auto;
+	margin-right:auto;
+	border: 1px solid #333;
+	width:930px;
+}
+#header {
+	background-color: #000000;
+}
+#header ul {
+	list-style-type:none;
+	background-color:#000067;
+	background-repeat:repeat-x;
+	margin-top:0;
+	padding-left:0;
+	margin-left:0; /* for IE */
+	padding-top:4px;
+	padding-bottom:5px;
+	font-weight:bold;
+	font-size:90%;
+}
+#header li {
+	display: inline;
+}
+#header li a {
+	color:#eeeeee;
+	text-decoration:none;
+	padding:5px;
+}
+#header li a:focus, #header li a:hover, #header li a:active {
+	background-color:#000;
+	background-repeat:repeat-x;
+}
+#content {
+	padding-right:15px;
+	padding-left:15px;
+}
+#content img {
+	border:1px solid;
+}
+#imagegallery img {
+	border:1px solid;
+}
+#main {
+	background-color:#F2FFFF;
+}
+#footer {
+	font-size:80%;
+	text-align:center;
+	padding:5px;
+	background-color:#000000;
+	background-repeat:repeat-x;
+	color:#FFFFFF;
+}
+#imagegallery{
+	background:#F2F2F2;
+	clear:left;
+	padding:10px;
+	min-height:200px;
+}
+#items{
+	float: left;
+	width: 33%;
+	border: 1px solid #DFDFDF;
+	background:white;
+}
+#items .item {
+	float: left;
+	padding:5px;
+	position: relative;
+	width: 52px;
+	height:52px;
+	margin: 10px;
+	background-color: #fff;
+	cursor: pointer;
+	border: 1px solid white;
+}
+#items .item:hover{border: 1px solid #ddd;}
+#items .item img {
+	width:50px;
+	max-height:35px;
+}
+#large{
+	border: 1px solid #DFDFDF;
+	width: 66%;
+	margin-left:34%;
+	background-color: #fff;
+	text-align:center;
+	font-family:Georgia, Times, san-serif;
+	font-size:12px;
+}
+#large .info{
+	font-size: 1.2em;
+	text-align: center;
+	font-weight: bold;
+	padding:10px;
+	color:#B3B3B3;
+}
+#items  p{display:none;}
+#large .item {
+	margin-top:20px;
+	margin-bottom:20px;
+	border-width: 1px;
+	cursor: default;
+	text-align:center;
+}
+#large .item img{
+	max-width:600px;
+	max-height: 600px;
+}
+.style2 {font-family: "Courier New", Courier, monospace}
+.style3 {font-family: "Courier New", Courier, monospace; font-weight: bold; }
+.style4 {font-style: italic}
+</style>
+</head>
+
+<body>
+<div id="main">
+<div id="header">
+    <div align="left">
+	    RSC Project</div>
+    <ul>
+        <li>
+          <div align="center">
+            <ul>
+              <li><a href="#basics">Basics</a></li>
+              <li><a href="#commands">&nbsp;&nbsp;&nbsp; Commands</a></li>
+              <li><a href="#conclusion">&nbsp;&nbsp;&nbsp; Conclusion</a><a href="contact.html"></a></li>
+	      <li>&nbsp;&nbsp;&nbsp; Example quests</li>
+            </ul>
+          </div>
+        </li>
+    </ul>
+</div>
+
+<div id="content">
+    <h1 align="center"><em>RSC Project Quest Documentation </em></h1>
+    <h2 align="center">by: Devin</h2>
+	<p align="center">&nbsp;</p>
+    <br />
+    <h2><a name="basics" id="basics"></a>Quest script basics <span class="style4"></span></h2>
+	<p>A quest script has a number of prerequisites. </p>
+	<ul>
+	  <li>Your quest script class <em>must</em> extend <span class="style2">org.rscdaemon.server.quest.Quest</span> to be recognized as a quest script. </li>
+      <li>Your quest script <em>must</em> contain the procedure <span class="style2">public void handleAction(QuestAction action, Object[] args, Player player)</span>. This is where all quest actions are handled, and is the root of your quest script’s functionality. </li>
+	  <li>Your quest script  <em>must</em> contain the function <span class="style2">public int getUniqueID()</span>. This function must return a completely <em>unique </em>I.D. number, that is to say, an identification number that doesn't belong to any other quests. Think of it like a car license plate number, which identifies a unique car and no other car can share that identification. </li>
+	  <li>Your quest script <em>must</em> contain the function <span class="style2">public String getName()</span>. This function should return the name of the quest as the player should see it on their client-side list. When the player logs into the game, the server sends your quest's name to the client, so make it short and to the point like original RSC quest names, eg. &quot;Imp Catcher&quot;. </li>
+	</ul>
+	<p>Here is an example of a test script that passes the bare minimum requirements, and as such, doesn't actually do anything except compile and load successfully:</p>
+	<p class="style3">TestScript.java</p>
+	<table width="100%" border="1" cellpadding="15" cellspacing="0" bordercolor="#000000" bgcolor="#EEEEEE">
+      <tr>
+        <td><span class="style2">
+package rsca.gs.plugins.quests;<br/><br/>
+import rsca.gs.quest.*;<br />
+import rsca.gs.model.*;<br />
+<br />
+public class TestScript extends Quest<br />
+{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;
+/**<br />
+&nbsp;&nbsp;&nbsp;&nbsp; * @return the quest's name<br />
+&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	public String getName()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	return &quot;Test Quest&quot;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	/**<br />
+&nbsp;&nbsp;&nbsp;&nbsp; * @return this quest's unique id<br />
+&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	public int getUniqueID()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	return 0;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	/**<br />
+&nbsp;&nbsp;&nbsp;&nbsp; * Handles the given quest action<br />
+&nbsp;&nbsp;&nbsp;&nbsp; */<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	public void handleAction(QuestAction action, Object[] args, Player player)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;	}<br />
+}</span></td>
+      </tr>
+    </table>
+	<p><br />
+</p>
+	<h2><a name="commands" id="commands"></a>Quest script commands <span class="style4"></span></h2>
+	<p>Basically, the most powerful feature of the scripting engine  is the fact that it's pure unadulterated Java, and as such, you can easily and  directly access all objects of the server. This however places a great deal of  responsibility on the scripter to know what they're doing, which is its one  biggest disadvantage. A badly-coded quest has the potential to crash the server  completely, among other things. Quest scripts literally have complete power  over the <span class="style2">GameEngine</span>, as if it were server code. Quests can spawn NPCs, remove  objects, kill players or even shut down the server (a completely pointless  feature, but a feature nonetheless).</p>
+	<p>However, quest scripts have a number of direct commands that  are inherited from <span class="style2">org.rscdaemon.server.quest.Quest</span>. These commands are mostly just a convient way of simplify  the scripting process and few commands are specifically related to quests. Here’s  a list of all the methods directly inherited from <span class="style2">Quest</span>:</p>
+	<p class="style3">Commands</p>
+	<table width="100%" border="1" cellpadding="15" cellspacing="0" bordercolor="#000000" bgcolor="#EEEEEE">
+      <tr>
+        <td><p class="style2">public void associateNpc(int npcID)</p>
+        <p>This command associates the given NPC ID with this quest. When a quest action is triggered, the server doesn't trigger <span class="style2">handleAction()</span> instantly. First it checks to make sure that the given entity is associated with the quest. So if you have a NPC that your quest interacts with, you must associate it using this method first, or you will never receive its quest actions. The best place to do this is in <span class="style2">init()</span>. This applies to all entities.</p>
+        <hr />
+        <p class="style2">public void associateItem(int itemID)</p>
+        <p>This command associates the given item ID with this quest. See <span class="style2">associateNpc(int npcID)</span> for more information on how this works. </p>
+        <hr />
+        <p class="style2">public void associateObject(int objectID, int objectX, int objectY)</p>
+        <p>This command associates the given object ID with this quest. You must also include the object's x and y world coordinates, since duplicate object IDs exist throughout the game and this is the only way to identifiy a specific object. See <span class="style2">associateNpc(int npcID)</span> for more information on how this works.</p>
+        <hr />
+        <p class="style2">public boolean isNpcAssociated(int npcID)</p>
+        <p>Returns whether or not the given NPC ID is associated with this quest. The server uses this function to identify NPCs that are associated with the quest. See <span class="style2">associateNpc(int npcID)</span> for more information on how this works.</p>
+        <hr />
+        <p class="style2">public boolean isItemAssociated(int itemID)</p>
+        <p>Returns whether or not the given item ID is associated with this quest. The server uses this function to identify items that are associated with the quest. See <span class="style2">associateNpc(int npcID)</span> for more information on how this works.</p>
+        <hr />        <p class="style2">public boolean isObjectAssociated(GameObject obj)</p>
+        <p>Returns whether or not the given object is associated with this quest. The server uses this function to identify objects that are associated with the quest. It also checks the object's x and y coordinates. See <span class="style2">associateNpc(int npcID)</span> and <span class="style2">associateObject(int objectID, int objectX, int objectY)</span> for more information on how this works.</p>
+        <hr />
+        <p class="style2">public void sendChat(String msg, Npc npc, Player player)</p>
+        <p>This method sends chat to the player, <em>from </em>the NPC.</p>
+        <hr />
+        <p class="style2">public void sendChat(String msg, Player player, Npc npc)</p>
+        <p>This method sends chat to the player, <em>from </em>the player.</p>
+        <hr />
+        <p class="style2">public void addSingleEvent(SingleEvent event)</p>
+        <p>This method queues the single event to the DelayedEventHandler. </p>
+        <hr />        <p class="style2">public boolean isNpcVisible(Npc npc, Player player)</p>
+        <p>This function is used to prevent players from seeing NPCs that they shouldn't see yet. By default it returns <span class="style2">true</span>. You can override this method to check any number of prerequisites on the player object, for example if their quest stage his high enough to view the given NPC.</p>
+        <hr />
+        <p class="style2">public boolean isItemVisible(Item item, Player player)</p>
+        <p>This function is used to prevent players from seeing items that they shouldn't see yet. See         <span class="style2">isNpcVisible(Npc npc, Player player)</span> for more information on how this works. </p>
+        <hr />
+        <p class="style2">public boolean loadQuest()</p>
+        <p>This function is used to stop the server from loading incomplete or unready quests. By default it returns <span class="style2">true</span>. If your quest is not yet ready to be loaded and used by the server, override this method and make it return <span class="style2">false</span>. </p>
+        <hr />
+        <p class="style2">public void sleep(long ms)</p>
+        <p>This method is used to pause the quest for the given amount of milliseconds.</p>
+        <hr />
+        <p class="style2">public int getMenuOption(final Player player, String... menu, long timeout)</p>
+        <p>This method is used to return what the player chooses out of a given list of menu options. You can specify how long to wait before the menu times out by specifying <span class="style2">timeout</span> in milliseconds. Eg: </p>
+        <p class="style2">int option = getMenuOption(player, &quot;This is a list&quot;, &quot;Of menu options&quot;, &quot;That you can choose from&quot;, 60000);</p>
+        <hr />
+        <p class="style2">public int getMenuOption(final Player player, String... menu)</p>
+        <p>This invokes <span class="style2">getMenuOption()</span> with the given arguments and a default 30 millisecond timeout.</p>
+        <hr />
+        <p class="style2">public void queueChat(Player player, Npc npc, long delay, String... chat)</p>
+        <p>This queues the given chat <em>from </em>the player <em>to </em>the NPC, with the given delay in milliseconds between each message. Eg:</p>
+        <p class="style2">queueChat(npc, player, 3200,<br />
+&nbsp;&nbsp;&nbsp; &quot;My own elves!&quot;,<br />
+&nbsp;&nbsp;&nbsp; &quot;I landed here last night in my sleigh&quot;,<br />
+&nbsp;&nbsp;&nbsp; &quot;To deliver my presents to the citizens of this land&quot;,<br />
+&nbsp;&nbsp;&nbsp; &quot;But an evil Dark Knight wizard cast a spell on my Elves&quot;,<br />
+&nbsp;&nbsp;&nbsp; &quot;And they stole my presents and ran away!&quot;<br />
+);</p>
+        <hr />
+        <p class="style2">public void queueChat(Npc npc, Player player, long delay, String... chat)</p>
+        <p>This queues the given chat <em>from </em>the NPC <em>to </em>the player, with the given delay in milliseconds between each message. See <span class="style2">queueChat(Player player, Npc npc, long delay, String... chat)</span> for an example. </p>
+        </td>
+      </tr>
+    </table>
+	<p align="left"><br />
+</p>
+    <h2><a name="conclusion" id="conclusion"></a>Conclusion<span class="style4"></span></h2>
+    <p>Before you write any quests it is HIGHLY recommended that you download and review example quests. The code there demonstrates the standard at which we need quests to be coded to. You will notice that the player is set busy and unbusy at times that there are if statements when removing items and so on and so forth. These are prerequisite for any quest. If you are unsure what to use for the QuestID, use 0 and we will change it outselfs.
+    <p>There's not much else I can explain. My best suggestion is to read through existing quest code to see how I've written them using this system. You don't need to be a fantastic Java programmer to be able to script quests, but I recommend learning the basics of both Java and the RSCD base. Good luck, and if you have any questions, read this over again or google it. If that fails you fail, but try IRC and if I'm able to I'll help you out. Unless you're Ryan, in which case,  <a href="http://www.w3schools.com/xml/xml_whatis.asp">go learn more XML </a>.</p>
+    <p>Cheers,<br />
+    Devin.</p>
+  </div>
+<div id="footer">
+    <div align="center">&copy; 2006 RSC Project</div>
+</div>
+</div>
+</body>
+</html>

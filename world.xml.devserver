@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>RSCProject Dev Config</comment>
+	<entry key="version">37</entry>
+	<entry key="ip">69.197.6.71</entry>
+	<entry key="port">43595</entry>
+	<entry key="name">RSCAngel</entry>
+	<entry key="location">USA</entry>
+	<entry key="maxplayers">800</entry>
+	<entry key="servernum">3</entry>
+	<entry key="lsip">localhost</entry>
+	<entry key="lsport">34526</entry>
+</properties>
