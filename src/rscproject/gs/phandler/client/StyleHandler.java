@@ -1,7 +1,6 @@
 package rscproject.gs.phandler.client;
 
 import org.apache.mina.common.IoSession;
-
 import rscproject.gs.Instance;
 import rscproject.gs.connection.Packet;
 import rscproject.gs.model.Player;
@@ -15,13 +14,13 @@ public class StyleHandler implements PacketHandler {
     public static final World world = Instance.getWorld();
 
     public void handlePacket(Packet p, IoSession session) throws Exception {
-	Player player = (Player) session.getAttachment();
-	int style = p.readByte();
-	if (style < 0 || style > 3) {
-	    player.setSuspiciousPlayer(true);
-	    return;
-	}
-	player.setCombatStyle(style);
+        Player player = (Player) session.getAttachment();
+        int style = p.readByte();
+        if (style < 0 || style > 3) {
+            player.setSuspiciousPlayer(true);
+            return;
+        }
+        player.setCombatStyle(style);
     }
 
 }

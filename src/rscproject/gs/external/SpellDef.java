@@ -1,8 +1,8 @@
 package rscproject.gs.external;
 
 import java.util.HashMap;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * The definition wrapper for spells
@@ -31,22 +31,22 @@ public class SpellDef extends EntityDef {
     public int type;
 
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     public int getReqLevel() {
-	return reqLevel;
+        return reqLevel;
     }
 
     public int getRuneCount() {
-	return runeCount;
+        return runeCount;
     }
 
     public Set<Entry<Integer, Integer>> getRunesRequired() {
-	return requiredRunes.entrySet();
+        return requiredRunes.entrySet();
     }
 
     public int getSpellType() {
-	return type;
+        return type;
     }
 }

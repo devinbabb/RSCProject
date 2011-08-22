@@ -27,30 +27,30 @@ public class DoorDef extends EntityDef {
     public int unknown;
 
     public String getCommand1() {
-	return command1.toLowerCase();
+        return command1.toLowerCase();
     }
 
     public String getCommand2() {
-	return command2.toLowerCase();
+        return command2.toLowerCase();
     }
 
     public int getDoorType() {
-	return doorType;
+        return doorType;
     }
 
     public int getModelVar1() {
-	return modelVar1;
+        return modelVar1;
     }
 
     public int getModelVar2() {
-	return modelVar2;
+        return modelVar2;
     }
 
     public int getModelVar3() {
-	return modelVar3;
+        return modelVar3;
     }
 
     public int getUnknown() {
-	return unknown;
+        return unknown;
     }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Synchronized packet queue
+ *
  * @author Devin
  */
 public class PacketQueue<T extends Packet> {
@@ -17,9 +18,9 @@ public class PacketQueue<T extends Packet> {
      * Adds a packet to the queue
      */
     public void add(T p) {
-	synchronized (packets) {
-	    packets.add(p);
-	}
+        synchronized (packets) {
+            packets.add(p);
+        }
     }
 
     /**
@@ -27,18 +28,18 @@ public class PacketQueue<T extends Packet> {
      * backing store
      */
     public List<T> getPackets() {
-	List<T> tmpList;
-	synchronized (packets) {
-	    tmpList = (List<T>) packets.clone();
-	    packets.clear();
-	}
-	return tmpList;
+        List<T> tmpList;
+        synchronized (packets) {
+            tmpList = (List<T>) packets.clone();
+            packets.clear();
+        }
+        return tmpList;
     }
 
     /**
      * Returns if there is packets to process
      */
     public boolean hasPackets() {
-	return !packets.isEmpty();
+        return !packets.isEmpty();
     }
 }

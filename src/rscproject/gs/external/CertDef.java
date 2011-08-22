@@ -15,14 +15,14 @@ public class CertDef {
     public String name;
 
     public int getCertID() {
-	return certID;
+        return certID;
     }
 
     public int getItemID() {
-	return itemID;
+        return itemID;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 }

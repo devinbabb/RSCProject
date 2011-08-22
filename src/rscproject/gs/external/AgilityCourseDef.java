@@ -37,48 +37,48 @@ public class AgilityCourseDef {
      * @return the end ID
      */
     public int getEndID() {
-	return endID;
+        return endID;
     }
 
     /**
      * @return the end x
      */
     public int getEndX() {
-	return endX;
+        return endX;
     }
 
     /**
      * @return the end y
      */
     public int getEndY() {
-	return endY;
+        return endY;
     }
 
     /**
      * @return the exp reward
      */
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     /**
      * @return this course's name
      */
     public String getName() {
-	return name;
+        return name;
     }
 
     /**
      * @return the starting object x
      */
     public int getStartX() {
-	return startX;
+        return startX;
     }
 
     /**
      * @return the starting object y
      */
     public int getStartY() {
-	return startY;
+        return startY;
     }
 }

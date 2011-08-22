@@ -2,6 +2,7 @@ package rscproject.ls.packethandler;
 
 /**
  * The definition of a packet handler, for use with XStream.
+ *
  * @author Devin
  */
 public class PacketHandlerDef {
@@ -17,33 +18,31 @@ public class PacketHandlerDef {
     /**
      * Constructs a new packet handler definition, entailing that packets with
      * the given IDs are to be handled by the specified class.
-     * 
-     * @param ids
-     *            The IDs of packets to be handled
-     * @param className
-     *            The name of the packet handler class
+     *
+     * @param ids       The IDs of packets to be handled
+     * @param className The name of the packet handler class
      */
     public PacketHandlerDef(int[] ids, String className) {
-	this.ids = ids;
-	this.className = className;
+        this.ids = ids;
+        this.className = className;
     }
 
     /**
      * Returns the IDs of packets to be handled.
-     * 
+     *
      * @return An <code>int</code> array containing the IDs of packets to be
      *         handled.
      */
     public int[] getAssociatedPackets() {
-	return ids;
+        return ids;
     }
 
     /**
      * Returns the name of the packet handler class.
-     * 
+     *
      * @return The name of the packet handler's class
      */
     public String getClassName() {
-	return className;
+        return className;
     }
 }

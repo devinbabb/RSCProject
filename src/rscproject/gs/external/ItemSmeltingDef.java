@@ -23,19 +23,19 @@ public class ItemSmeltingDef {
     public int requiredLvl;
 
     public int getBarId() {
-	return barId;
+        return barId;
     }
 
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     public int getReqLevel() {
-	return requiredLvl;
+        return requiredLvl;
     }
 
     public ReqOreDef[] getReqOres() {
-	return reqOres;
+        return reqOres;
     }
 
 }

@@ -27,23 +27,23 @@ public class ObjectWoodcuttingDef {
     public int respawnTime;
 
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     public int getFell() {
-	return fell;
+        return fell;
     }
 
     public int getLogId() {
-	return logId;
+        return logId;
     }
 
     public int getReqLevel() {
-	return requiredLvl;
+        return requiredLvl;
     }
 
     public int getRespawnTime() {
-	return respawnTime;
+        return respawnTime;
     }
 
 }

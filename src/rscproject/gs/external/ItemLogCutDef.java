@@ -17,39 +17,39 @@ public class ItemLogCutDef {
     public int shortbowLvl;
 
     public int getLongbowExp() {
-	return longbowExp;
+        return longbowExp;
     }
 
     public int getLongbowID() {
-	return longbowID;
+        return longbowID;
     }
 
     public int getLongbowLvl() {
-	return longbowLvl;
+        return longbowLvl;
     }
 
     public int getShaftAmount() {
-	return shaftAmount;
+        return shaftAmount;
     }
 
     public int getShaftExp() {
-	return shaftAmount;
+        return shaftAmount;
     }
 
     public int getShaftLvl() {
-	return shaftLvl;
+        return shaftLvl;
     }
 
     public int getShortbowExp() {
-	return shortbowExp;
+        return shortbowExp;
     }
 
     public int getShortbowID() {
-	return shortbowID;
+        return shortbowID;
     }
 
     public int getShortbowLvl() {
-	return shortbowLvl;
+        return shortbowLvl;
     }
 
 }

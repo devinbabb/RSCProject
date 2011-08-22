@@ -15,10 +15,10 @@ public class PrayerDef extends EntityDef {
     public int reqLevel;
 
     public int getDrainRate() {
-	return drainRate;
+        return drainRate;
     }
 
     public int getReqLevel() {
-	return reqLevel;
+        return reqLevel;
     }
 }

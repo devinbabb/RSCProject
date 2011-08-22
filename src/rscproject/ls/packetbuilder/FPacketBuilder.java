@@ -14,34 +14,32 @@ public class FPacketBuilder extends StaticPacketBuilder {
 
     /**
      * Sets the ID for this packet.
-     * 
-     * @param id
-     *            The ID of the packet
+     *
+     * @param id The ID of the packet
      */
     public FPacketBuilder setID(int pID) {
-	this.pID = pID;
-	return this;
+        this.pID = pID;
+        return this;
     }
 
     /**
      * Sets the parameters for this packet.
-     * 
-     * @param id
-     *            The parameters of the packet
+     *
+     * @param id The parameters of the packet
      */
     public FPacketBuilder setParameters(String[] parameters) {
-	this.parameters = parameters;
-	return this;
+        this.parameters = parameters;
+        return this;
     }
 
     /**
      * Returns a <code>FPacket</code> object for the data contained in this
      * builder.
-     * 
+     *
      * @return A <code>FPacket</code> object
      */
     public FPacket toPacket() {
-	return new FPacket(null, pID, parameters, bare);
+        return new FPacket(null, pID, parameters, bare);
     }
 
 }

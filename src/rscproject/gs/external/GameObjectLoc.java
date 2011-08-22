@@ -23,30 +23,30 @@ public class GameObjectLoc {
     public int y;
 
     public GameObjectLoc(int id, int x, int y, int direction, int type) {
-	this.id = id;
-	this.x = x;
-	this.y = y;
-	this.direction = direction;
-	this.type = type;
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.direction = direction;
+        this.type = type;
     }
 
     public int getDirection() {
-	return direction;
+        return direction;
     }
 
     public int getId() {
-	return id;
+        return id;
     }
 
     public int getType() {
-	return type;
+        return type;
     }
 
     public int getX() {
-	return x;
+        return x;
     }
 
     public int getY() {
-	return y;
+        return y;
     }
 }

@@ -70,82 +70,82 @@ public class NPCDef extends EntityDef {
     public int walkModel, combatModel, combatSprite;
 
     public int getAtt() {
-	return attack;
+        return attack;
     }
 
     public int getBottomColour() {
-	return bottomColour;
+        return bottomColour;
     }
 
     public int getCamera1() {
-	return camera1;
+        return camera1;
     }
 
     public int getCamera2() {
-	return camera2;
+        return camera2;
     }
 
     public int getCombatModel() {
-	return combatModel;
+        return combatModel;
     }
 
     public int getCombatSprite() {
-	return combatSprite;
+        return combatSprite;
     }
 
     public String getCommand() {
-	return command;
+        return command;
     }
 
     public int getDef() {
-	return defense;
+        return defense;
     }
 
     public ItemDropDef[] getDrops() {
-	return drops;
+        return drops;
     }
 
     public int getHairColour() {
-	return hairColour;
+        return hairColour;
     }
 
     public int getHits() {
-	return hits;
+        return hits;
     }
 
     public int getSkinColour() {
-	return skinColour;
+        return skinColour;
     }
 
     public int getSprite(int index) {
-	return sprites[index];
+        return sprites[index];
     }
 
     public int[] getStats() {
-	return new int[] { attack, defense, strength };
+        return new int[]{attack, defense, strength};
     }
 
     public int getStr() {
-	return strength;
+        return strength;
     }
 
     public int getTopColour() {
-	return topColour;
+        return topColour;
     }
 
     public int getWalkModel() {
-	return walkModel;
+        return walkModel;
     }
 
     public boolean isAggressive() {
-	return attackable && aggressive;
+        return attackable && aggressive;
     }
 
     public boolean isAttackable() {
-	return attackable;
+        return attackable;
     }
 
     public int respawnTime() {
-	return respawnTime;
+        return respawnTime;
     }
 }

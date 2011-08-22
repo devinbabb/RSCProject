@@ -19,14 +19,14 @@ public class ItemBowStringDef {
     public int requiredLvl;
 
     public int getBowID() {
-	return bowID;
+        return bowID;
     }
 
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     public int getReqLevel() {
-	return requiredLvl;
+        return requiredLvl;
     }
 }

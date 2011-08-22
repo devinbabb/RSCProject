@@ -19,25 +19,25 @@ public class ObjectFishingDef {
     public int netId;
 
     public int getBaitId() {
-	return baitId;
+        return baitId;
     }
 
     public ObjectFishDef[] getFishDefs() {
-	return defs;
+        return defs;
     }
 
     public int getNetId() {
-	return netId;
+        return netId;
     }
 
     public int getReqLevel() {
-	int requiredLevel = 99;
-	for (ObjectFishDef def : defs) {
-	    if (def.getReqLevel() < requiredLevel) {
-		requiredLevel = def.getReqLevel();
-	    }
-	}
-	return requiredLevel;
+        int requiredLevel = 99;
+        for (ObjectFishDef def : defs) {
+            if (def.getReqLevel() < requiredLevel) {
+                requiredLevel = def.getReqLevel();
+            }
+        }
+        return requiredLevel;
     }
 
 }

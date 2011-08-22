@@ -27,22 +27,22 @@ public class ItemHerbSecond {
     public int unfinishedID;
 
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     public int getPotionID() {
-	return potionID;
+        return potionID;
     }
 
     public int getReqLevel() {
-	return requiredLvl;
+        return requiredLvl;
     }
 
     public int getSecondID() {
-	return secondID;
+        return secondID;
     }
 
     public int getUnfinishedID() {
-	return unfinishedID;
+        return unfinishedID;
     }
 }

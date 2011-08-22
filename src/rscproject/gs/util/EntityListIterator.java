@@ -1,13 +1,13 @@
 package rscproject.gs.util;
 
+import rscproject.gs.model.Entity;
+
 import java.util.Iterator;
 import java.util.Set;
 
-import rscproject.gs.model.Entity;
-
 /**
  * @author Devin
- **/
+ */
 
 public class EntityListIterator<E extends Entity> implements Iterator<E> {
     private int curIndex = 0;
@@ -16,25 +16,25 @@ public class EntityListIterator<E extends Entity> implements Iterator<E> {
     private Integer[] indicies;
 
     public EntityListIterator(Object[] entities, Set<Integer> indicies, EntityList<E> entityList) {
-	this.entities = entities;
-	this.indicies = indicies.toArray(new Integer[0]);
-	this.entityList = entityList;
+        this.entities = entities;
+        this.indicies = indicies.toArray(new Integer[0]);
+        this.entityList = entityList;
     }
 
     public boolean hasNext() {
-	return indicies.length != curIndex;
+        return indicies.length != curIndex;
     }
 
     public E next() {
-	Object temp = entities[indicies[curIndex]];
-	curIndex++;
-	return (E) temp;
+        Object temp = entities[indicies[curIndex]];
+        curIndex++;
+        return (E) temp;
     }
 
     public void remove() {
-	if (curIndex >= 1) {
-	    entityList.remove(indicies[curIndex - 1]);
-	}
+        if (curIndex >= 1) {
+            entityList.remove(indicies[curIndex - 1]);
+        }
     }
 
 }

@@ -60,7 +60,7 @@ public abstract class Mob extends Entity {
     protected long lastMovement = System.currentTimeMillis();
     public long lastTimeShot = System.currentTimeMillis();
     protected int mobSprite = 1;
-    private int[][] mobSprites = new int[][] { { 3, 2, 1 }, { 4, -1, 0 }, { 5, 6, 7 } };
+    private int[][] mobSprites = new int[][]{{3, 2, 1}, {4, -1, 0}, {5, 6, 7}};
     /**
      * Has our appearance changed since last update?
      */
@@ -87,37 +87,37 @@ public abstract class Mob extends Entity {
     protected boolean warnedToMove = false;
 
     public final boolean atObject(GameObject o) {
-	int dir = o.getDirection();
-	int width, height;
-	if (o.getType() == 1) {
-	    width = height = 1;
-	} else if (dir == 0 || dir == 4) {
-	    width = o.getGameObjectDef().getWidth();
-	    height = o.getGameObjectDef().getHeight();
-	} else {
-	    height = o.getGameObjectDef().getWidth();
-	    width = o.getGameObjectDef().getHeight();
-	}
-	for (int x = 0; x < width; x++) {
-	    for (int y = 0; y < height; y++) {
-		Point p = Point.location(o.getX() + x, o.getY() + y);
-		int xDist = Math.abs(location.getX() - p.getX());
-		int yDist = Math.abs(location.getY() - p.getY());
-		int tDist = xDist + yDist;
-		if (tDist <= 1) {
-		    return true;
-		}
-	    }
-	}
-	return false;
+        int dir = o.getDirection();
+        int width, height;
+        if (o.getType() == 1) {
+            width = height = 1;
+        } else if (dir == 0 || dir == 4) {
+            width = o.getGameObjectDef().getWidth();
+            height = o.getGameObjectDef().getHeight();
+        } else {
+            height = o.getGameObjectDef().getWidth();
+            width = o.getGameObjectDef().getHeight();
+        }
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                Point p = Point.location(o.getX() + x, o.getY() + y);
+                int xDist = Math.abs(location.getX() - p.getX());
+                int yDist = Math.abs(location.getY() - p.getY());
+                int tDist = xDist + yDist;
+                if (tDist <= 1) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean finishedPath() {
-	return pathHandler.finishedPath();
+        return pathHandler.finishedPath();
     }
 
     public int getAppearanceID() {
-	return appearanceID;
+        return appearanceID;
     }
 
     public abstract int getArmourPoints();
@@ -125,17 +125,17 @@ public abstract class Mob extends Entity {
     public abstract int getAttack();
 
     public int getCombatLevel() {
-	return combatLevel;
+        return combatLevel;
     }
 
     public CombatState getCombatState() {
-	return lastCombatState;
+        return lastCombatState;
     }
 
     public abstract int getCombatStyle();
 
     public long getCombatTimer() {
-	return combatTimer;
+        return combatTimer;
     }
 
     public abstract int getDefense();
@@ -143,29 +143,29 @@ public abstract class Mob extends Entity {
     public abstract int getHits();
 
     public int getHitsMade() {
-	return hitsMade;
+        return hitsMade;
     }
 
     public int getLastDamage() {
-	return lastDamage;
+        return lastDamage;
     }
 
     public long getLastMoved() {
-    	return lastMovement;
+        return lastMovement;
     }
 
     public Mob getOpponent() {
-	return combatWith;
+        return combatWith;
     }
 
     public int getSprite() {
-	return mobSprite;
+        return mobSprite;
     }
 
     public abstract int getStrength();
 
     public ViewArea getViewArea() {
-	return viewArea;
+        return viewArea;
     }
 
     public abstract int getWeaponAimPoints();
@@ -173,27 +173,27 @@ public abstract class Mob extends Entity {
     public abstract int getWeaponPowerPoints();
 
     public boolean hasMoved() {
-	return hasMoved;
+        return hasMoved;
     }
 
     public void incHitsMade() {
-	hitsMade++;
+        hitsMade++;
     }
 
     public boolean inCombat() {
-	return (mobSprite == 8 || mobSprite == 9) && combatWith != null;
+        return (mobSprite == 8 || mobSprite == 9) && combatWith != null;
     }
 
     public boolean isBusy() {
-	return busy;
+        return busy;
     }
 
     public boolean isPrayerActivated(int pID) {
-	return activatedPrayers[pID];
+        return activatedPrayers[pID];
     }
 
     public boolean isRemoved() {
-	return removed;
+        return removed;
     }
 
     public abstract void killedBy(Mob mob, boolean stake);
@@ -201,133 +201,133 @@ public abstract class Mob extends Entity {
     public abstract void remove();
 
     public void resetCombat(CombatState state) {
-	for (DelayedEvent event : Instance.getDelayedEventHandler().getEvents()) {
-	    if (event instanceof FightEvent) {
-		FightEvent fighting = (FightEvent) event;
-		if (fighting.getOwner().equals(this) || fighting.getAffectedMob().equals(this)) {
-		    fighting.stop();
-		    break;
-		}
-	    } else if (event instanceof DuelEvent) {
-		DuelEvent dueling = (DuelEvent) event;
-		if (dueling.getOwner().equals(this) || dueling.getAffectedPlayer().equals(this)) {
-		    dueling.stop();
-		    break;
-		}
-	    }
-	}
-	setBusy(false);
-	setSprite(4);
-	setOpponent(null);
-	setCombatTimer();
-	hitsMade = 0;
-	if (this instanceof Player) {
-	    Player player = (Player) this;
-	    player.setStatus(Action.IDLE);
-	}
-	lastCombatState = state;
+        for (DelayedEvent event : Instance.getDelayedEventHandler().getEvents()) {
+            if (event instanceof FightEvent) {
+                FightEvent fighting = (FightEvent) event;
+                if (fighting.getOwner().equals(this) || fighting.getAffectedMob().equals(this)) {
+                    fighting.stop();
+                    break;
+                }
+            } else if (event instanceof DuelEvent) {
+                DuelEvent dueling = (DuelEvent) event;
+                if (dueling.getOwner().equals(this) || dueling.getAffectedPlayer().equals(this)) {
+                    dueling.stop();
+                    break;
+                }
+            }
+        }
+        setBusy(false);
+        setSprite(4);
+        setOpponent(null);
+        setCombatTimer();
+        hitsMade = 0;
+        if (this instanceof Player) {
+            Player player = (Player) this;
+            player.setStatus(Action.IDLE);
+        }
+        lastCombatState = state;
     }
 
     public void resetMoved() {
-	hasMoved = false;
+        hasMoved = false;
     }
 
     public void resetPath() {
-	pathHandler.resetPath();
+        pathHandler.resetPath();
 
     }
 
     public void resetSpriteChanged() {
-	spriteChanged = false;
+        spriteChanged = false;
     }
 
     public void setAppearnceChanged(boolean b) {
-	ourAppearanceChanged = b;
+        ourAppearanceChanged = b;
     }
 
     public void setBusy(boolean busy) {
-	this.busy = busy;
+        this.busy = busy;
     }
 
     public void setCombatLevel(int level) {
-	combatLevel = level;
-	ourAppearanceChanged = true;
+        combatLevel = level;
+        ourAppearanceChanged = true;
     }
 
     public void setCombatTimer() {
-	combatTimer = System.currentTimeMillis();
+        combatTimer = System.currentTimeMillis();
     }
 
     public abstract void setHits(int lvl);
 
     public void setLastDamage(int d) {
-	lastDamage = d;
+        lastDamage = d;
     }
 
     public void setLastMoved() {
-	lastMovement = System.currentTimeMillis();
+        lastMovement = System.currentTimeMillis();
     }
 
     public void setLocation(Point p) {
-	setLocation(p, false);
+        setLocation(p, false);
     }
 
     public void setLocation(Point p, boolean teleported) {
-	if (!teleported) {
-	    updateSprite(p);
-	    hasMoved = true;
-	}
-	setLastMoved();
-	warnedToMove = false;
-	super.setLocation(p);
+        if (!teleported) {
+            updateSprite(p);
+            hasMoved = true;
+        }
+        setLastMoved();
+        warnedToMove = false;
+        super.setLocation(p);
     }
 
     public void setOpponent(Mob opponent) {
-	combatWith = opponent;
+        combatWith = opponent;
     }
 
     public void setPath(Path path) {
-	pathHandler.setPath(path);
+        pathHandler.setPath(path);
     }
 
     public void setPrayer(int pID, boolean b) {
-	activatedPrayers[pID] = b;
+        activatedPrayers[pID] = b;
     }
 
     public void setSprite(int x) {
-	spriteChanged = true;
-	mobSprite = x;
+        spriteChanged = true;
+        mobSprite = x;
     }
 
     public boolean spriteChanged() {
-	return spriteChanged;
+        return spriteChanged;
     }
 
     public void updateAppearanceID() {
-	if (ourAppearanceChanged) {
-	    appearanceID++;
-	}
+        if (ourAppearanceChanged) {
+            appearanceID++;
+        }
     }
 
     public void updatePosition() {
-	pathHandler.updatePosition();
+        pathHandler.updatePosition();
     }
 
     protected void updateSprite(Point newLocation) {
-	try {
-	    int xIndex = getLocation().getX() - newLocation.getX() + 1;
-	    int yIndex = getLocation().getY() - newLocation.getY() + 1;
-	    setSprite(mobSprites[xIndex][yIndex]);
-	} catch (Exception e) {
-	    Logger.error(e.getMessage());
-	}
+        try {
+            int xIndex = getLocation().getX() - newLocation.getX() + 1;
+            int yIndex = getLocation().getY() - newLocation.getY() + 1;
+            setSprite(mobSprites[xIndex][yIndex]);
+        } catch (Exception e) {
+            Logger.error(e.getMessage());
+        }
     }
 
     public boolean warnedToMove() {
-	return warnedToMove;
+        return warnedToMove;
     }
 
     public void warnToMove() {
-	warnedToMove = true;
+        warnedToMove = true;
     }
 }

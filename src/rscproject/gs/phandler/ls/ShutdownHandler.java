@@ -1,7 +1,6 @@
 package rscproject.gs.phandler.ls;
 
 import org.apache.mina.common.IoSession;
-
 import rscproject.gs.Instance;
 import rscproject.gs.connection.LSPacket;
 import rscproject.gs.connection.Packet;
@@ -20,9 +19,9 @@ public class ShutdownHandler implements PacketHandler {
     public static final World world = Instance.getWorld();
 
     public void handlePacket(Packet p, IoSession session) throws Exception {
-	long uID = ((LSPacket) p).getUID();
-	Logger.event("LOGIN_SERVER requested shutdown");
-	Instance.getServer().kill();
+        long uID = ((LSPacket) p).getUID();
+        Logger.event("LOGIN_SERVER requested shutdown");
+        Instance.getServer().kill();
     }
 
 }

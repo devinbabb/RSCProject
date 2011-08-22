@@ -16,68 +16,68 @@ public abstract class DelayedEvent {
 
     // f2p
     public DelayedEvent(Player owner, int delay) {
-	this.owner = owner;
-	this.delay = delay;
+        this.owner = owner;
+        this.delay = delay;
     }
 
     public DelayedEvent(Player owner, int delay, Object[] arg) {
-	args = arg;
-	this.owner = owner;
-	this.delay = delay;
+        args = arg;
+        this.owner = owner;
+        this.delay = delay;
     }
 
     public boolean belongsTo(Player player) {
-	return owner != null && owner.equals(player);
+        return owner != null && owner.equals(player);
     }
 
     public int getDelay() {
-	return delay;
+        return delay;
     }
 
     public Object getIdentifier() {
-	return null;
+        return null;
     }
 
     public Player getOwner() {
-	return owner;
+        return owner;
     }
 
     public boolean hasOwner() {
-	return owner != null;
+        return owner != null;
     }
 
     public boolean is(DelayedEvent e) {
-	return (e.getIdentifier() != null && e.getIdentifier().equals(getIdentifier()));
+        return (e.getIdentifier() != null && e.getIdentifier().equals(getIdentifier()));
     }
 
     public abstract void run();
 
     public void setDelay(int delay) {
-	this.delay = delay;
+        this.delay = delay;
     }
 
     public void setLastRun(long time) {
-	lastRun = time;
+        lastRun = time;
     }
 
     public final boolean shouldRemove() {
-	return !matchRunning;
+        return !matchRunning;
     }
 
     public final boolean shouldRun() {
-	return matchRunning && System.currentTimeMillis() - lastRun >= delay;
+        return matchRunning && System.currentTimeMillis() - lastRun >= delay;
     }
 
     public final void stop() {
-	matchRunning = false;
+        matchRunning = false;
     }
 
     public int timeTillNextRun() {
-	int time = (int) (delay - (System.currentTimeMillis() - lastRun));
-	return time < 0 ? 0 : time;
+        int time = (int) (delay - (System.currentTimeMillis() - lastRun));
+        return time < 0 ? 0 : time;
     }
 
     public final void updateLastRun() {
-	lastRun = System.currentTimeMillis();
+        lastRun = System.currentTimeMillis();
     }
 }

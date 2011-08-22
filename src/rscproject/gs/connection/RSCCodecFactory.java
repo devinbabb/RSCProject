@@ -6,6 +6,7 @@ import org.apache.mina.filter.codec.ProtocolEncoder;
 
 /**
  * Provides access to the protocol encoders and decoders for the RSC protocol.
+ *
  * @author Devin
  */
 public class RSCCodecFactory implements ProtocolCodecFactory {
@@ -20,19 +21,19 @@ public class RSCCodecFactory implements ProtocolCodecFactory {
 
     /**
      * Provides the decoder to use to format outgoing data.
-     * 
+     *
      * @return A protocol decoder
      */
     public ProtocolDecoder getDecoder() {
-	return decoder;
+        return decoder;
     }
 
     /**
      * Provides the encoder to use to parse incoming data.
-     * 
+     *
      * @return A protocol encoder
      */
     public ProtocolEncoder getEncoder() {
-	return encoder;
+        return encoder;
     }
 }

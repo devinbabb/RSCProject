@@ -1,11 +1,11 @@
 package rscproject.gs.model;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import rscproject.config.Formulae;
 import rscproject.gs.Instance;
 import rscproject.gs.tools.DataConversions;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Devin
@@ -13,137 +13,141 @@ import rscproject.gs.tools.DataConversions;
 
 public class ActiveTile {
 
-	/**
-	 * World instance
-	 */
-	private static World world = Instance.getWorld();
-	/**
-	 * A list of all items currently on this tile
-	 */
-	private List<Item> items = new LinkedList<Item>();
-	/**
-	 * A list of all npcs currently on this tile
-	 */
-	private List<Npc> npcs = new LinkedList<Npc>();
-	/**
-	 * The object currently on this tile (can only have 1 at a time)
-	 */
-	private GameObject object = null;
-	/**
-	 * A list of all players currently on this tile
-	 */
-	private List<Player> players = new LinkedList<Player>();
-	/**
-	 * The x and y coordinates of this tile
-	 */
-	private int x, y;
+    /**
+     * World instance
+     */
+    private static World world = Instance.getWorld();
+    /**
+     * A list of all items currently on this tile
+     */
+    private List<Item> items = new LinkedList<Item>();
+    /**
+     * A list of all npcs currently on this tile
+     */
+    private List<Npc> npcs = new LinkedList<Npc>();
+    /**
+     * The object currently on this tile (can only have 1 at a time)
+     */
+    private GameObject object = null;
+    /**
+     * A list of all players currently on this tile
+     */
+    private List<Player> players = new LinkedList<Player>();
+    /**
+     * The x and y coordinates of this tile
+     */
+    private int x, y;
 
-	/**
-	 * Constructs a new tile at the given coordinates
-	 */
-	public ActiveTile(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-	public boolean remove = false;
-	/**
-	 * Add an entity to the tile
-	 */
-	public void add(Entity entity) {
-		if (entity instanceof Player) {
-			players.add((Player) entity);
-		} else if (entity instanceof Npc) {
-			npcs.add((Npc) entity);
-		} else if (entity instanceof Item) {
-			items.add((Item) entity);
-		} else if (entity instanceof GameObject) {
-			if (object != null) {
-				remove = true;
-				world.unregisterGameObject(object);
-				remove = false;
-			}
-			object = (GameObject) entity;
-		}
-	}
+    /**
+     * Constructs a new tile at the given coordinates
+     */
+    public ActiveTile(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
-	public GameObject getGameObject() {
-		return object;
-	}
+    public boolean remove = false;
 
-	public List<Item> getItems() {
-		return items;
-	}
+    /**
+     * Add an entity to the tile
+     */
+    public void add(Entity entity) {
+        if (entity instanceof Player) {
+            players.add((Player) entity);
+        } else if (entity instanceof Npc) {
+            npcs.add((Npc) entity);
+        } else if (entity instanceof Item) {
+            items.add((Item) entity);
+        } else if (entity instanceof GameObject) {
+            if (object != null) {
+                remove = true;
+                world.unregisterGameObject(object);
+                remove = false;
+            }
+            object = (GameObject) entity;
+        }
+    }
 
-	public List<Npc> getNpcs() {
-		return npcs;
-	}
+    public GameObject getGameObject() {
+        return object;
+    }
 
-	public List<Player> getPlayers() {
-		return players;
-	}
+    public List<Item> getItems() {
+        return items;
+    }
 
-	public int getX() {
-		return x;
-	}
+    public List<Npc> getNpcs() {
+        return npcs;
+    }
 
-	public int getY() {
-		return y;
-	}
+    public List<Player> getPlayers() {
+        return players;
+    }
 
-	public boolean hasGameObject() {
-		return object != null;
-	}
+    public int getX() {
+        return x;
+    }
 
-	public boolean hasItem(Item item) {
-		return items.contains(item);
-	}
+    public int getY() {
+        return y;
+    }
 
-	public boolean hasItems() {
-		return items != null && items.size() > 0;
-	}
+    public boolean hasGameObject() {
+        return object != null;
+    }
 
-	public boolean hasNpcs() {
-		return npcs != null && npcs.size() > 0;
-	}
+    public boolean hasItem(Item item) {
+        return items.contains(item);
+    }
 
-	public boolean hasPlayers() {
-		return players != null && players.size() > 0;
-	}
+    public boolean hasItems() {
+        return items != null && items.size() > 0;
+    }
 
-	public boolean specificArea() {
-		boolean t = DataConversions.inPointArray(Formulae.noremoveTiles, new Point(this.getX(), this.getY()));
-		return t;
-	}
-	/**
-	 * Remove an entity from the tile
-	 */
-	public void remove(Entity entity) {
-		if (entity instanceof Player) {
-			players.remove(entity);
-			if (!this.hasGameObject() && !this.hasItems() && !this.hasNpcs() && !this.hasPlayers() && !this.specificArea()) {
-				Instance.getWorld().tiles[this.getX()][this.getY()] = null;
-			}
-		} else if (entity instanceof Npc) {
-			npcs.remove(entity);
-			if (!this.hasGameObject() && !this.hasItems() && !this.hasNpcs() && !this.hasPlayers() && !this.specificArea()) {
-				Instance.getWorld().tiles[this.getX()][this.getY()] = null;
-			}
-		} else if (entity instanceof Item) {
-			items.remove(entity);
-			if (!this.hasGameObject() && !this.hasItems() && !this.hasNpcs() && !this.hasPlayers() && !this.specificArea()) {
-				Instance.getWorld().tiles[this.getX()][this.getY()] = null;
-			}
-		} else if (entity instanceof GameObject) {
-			object = null;
-			
-			if (!this.hasGameObject() && !this.hasItems() && !this.hasNpcs() && !this.hasPlayers() && !remove) {
-				Instance.getWorld().tiles[this.getX()][this.getY()] = null;
-			}
-		}
-	}
-	public void cleanItself() {
-		if (!this.hasGameObject() && !this.hasItems() && !this.hasNpcs() && !this.hasPlayers() && !this.specificArea()) {
-			Instance.getWorld().tiles[this.getX()][this.getY()] = null;
-		}
-	}
+    public boolean hasNpcs() {
+        return npcs != null && npcs.size() > 0;
+    }
+
+    public boolean hasPlayers() {
+        return players != null && players.size() > 0;
+    }
+
+    public boolean specificArea() {
+        boolean t = DataConversions.inPointArray(Formulae.noremoveTiles, new Point(this.getX(), this.getY()));
+        return t;
+    }
+
+    /**
+     * Remove an entity from the tile
+     */
+    public void remove(Entity entity) {
+        if (entity instanceof Player) {
+            players.remove(entity);
+            if (!this.hasGameObject() && !this.hasItems() && !this.hasNpcs() && !this.hasPlayers() && !this.specificArea()) {
+                Instance.getWorld().tiles[this.getX()][this.getY()] = null;
+            }
+        } else if (entity instanceof Npc) {
+            npcs.remove(entity);
+            if (!this.hasGameObject() && !this.hasItems() && !this.hasNpcs() && !this.hasPlayers() && !this.specificArea()) {
+                Instance.getWorld().tiles[this.getX()][this.getY()] = null;
+            }
+        } else if (entity instanceof Item) {
+            items.remove(entity);
+            if (!this.hasGameObject() && !this.hasItems() && !this.hasNpcs() && !this.hasPlayers() && !this.specificArea()) {
+                Instance.getWorld().tiles[this.getX()][this.getY()] = null;
+            }
+        } else if (entity instanceof GameObject) {
+            object = null;
+
+            if (!this.hasGameObject() && !this.hasItems() && !this.hasNpcs() && !this.hasPlayers() && !remove) {
+                Instance.getWorld().tiles[this.getX()][this.getY()] = null;
+            }
+        }
+    }
+
+    public void cleanItself() {
+        if (!this.hasGameObject() && !this.hasItems() && !this.hasNpcs() && !this.hasPlayers() && !this.specificArea()) {
+            Instance.getWorld().tiles[this.getX()][this.getY()] = null;
+        }
+    }
 }

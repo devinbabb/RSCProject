@@ -2,9 +2,8 @@ package rscproject.gs.model.mini;
 
 /**
  * Data each player gets cached.
- * 
+ *
  * @author xEnt
- * 
  */
 public class Cache {
 

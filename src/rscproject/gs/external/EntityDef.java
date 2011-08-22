@@ -19,13 +19,13 @@ public abstract class EntityDef {
      * Returns the description of the entity
      */
     public String getDescription() {
-	return description;
+        return description;
     }
 
     /**
      * Returns the name of the entity
      */
     public String getName() {
-	return name;
+        return name;
     }
 }

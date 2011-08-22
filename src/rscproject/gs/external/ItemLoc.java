@@ -23,22 +23,22 @@ public class ItemLoc {
     public int y;
 
     public int getAmount() {
-	return amount;
+        return amount;
     }
 
     public int getId() {
-	return id;
+        return id;
     }
 
     public int getRespawnTime() {
-	return respawnTime;
+        return respawnTime;
     }
 
     public int getX() {
-	return x;
+        return x;
     }
 
     public int getY() {
-	return y;
+        return y;
     }
 }

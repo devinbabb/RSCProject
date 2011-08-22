@@ -2,6 +2,7 @@ package rscproject.gs.quest;
 
 /**
  * Handles the list of possible quest triggers
+ *
  * @author Devin
  */
 public enum QuestAction {
@@ -11,15 +12,15 @@ public enum QuestAction {
     private int id = -1;
 
     public String toString() {
-	return description + " (id " + id + ")";
+        return description + " (id " + id + ")";
     }
 
     public int getID() {
-	return id;
+        return id;
     }
 
     private QuestAction(String description, int id) {
-	this.description = description;
-	this.id = id;
+        this.description = description;
+        this.id = id;
     }
 }

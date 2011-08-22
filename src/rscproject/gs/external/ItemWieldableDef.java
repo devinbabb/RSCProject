@@ -1,8 +1,8 @@
 package rscproject.gs.external;
 
 import java.util.HashMap;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * The definition wrapper for items
@@ -55,54 +55,54 @@ public class ItemWieldableDef {
     private int wieldPos;
 
     public boolean femaleOnly() {
-	return femaleOnly;
+        return femaleOnly;
     }
 
     public int[] getAffectedTypes() {
-	int[] affectedTypes = EntityHandler.getItemAffectedTypes(type);
-	if (affectedTypes != null) {
-	    return affectedTypes;
-	}
-	return new int[0];
+        int[] affectedTypes = EntityHandler.getItemAffectedTypes(type);
+        if (affectedTypes != null) {
+            return affectedTypes;
+        }
+        return new int[0];
     }
 
     public int getArmourPoints() {
-	return armourPoints;
+        return armourPoints;
     }
 
     public int getMagicPoints() {
-	return magicPoints;
+        return magicPoints;
     }
 
     public int getPrayerPoints() {
-	return prayerPoints;
+        return prayerPoints;
     }
 
     public int getRangePoints() {
-	return rangePoints;
+        return rangePoints;
     }
 
     public int getSprite() {
-	return sprite;
+        return sprite;
     }
 
     public Set<Entry<Integer, Integer>> getStatsRequired() {
-	return requiredStats.entrySet();
+        return requiredStats.entrySet();
     }
 
     public int getType() {
-	return type;
+        return type;
     }
 
     public int getWeaponAimPoints() {
-	return weaponAimPoints;
+        return weaponAimPoints;
     }
 
     public int getWeaponPowerPoints() {
-	return weaponPowerPoints;
+        return weaponPowerPoints;
     }
 
     public int getWieldPos() {
-	return wieldPos;
+        return wieldPos;
     }
 }

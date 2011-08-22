@@ -13,36 +13,36 @@ public abstract class WalkMobToMobEvent extends DelayedEvent {
     private long startTime = 0L;
 
     public WalkMobToMobEvent(Mob owner, Mob affectedMob, int radius) {
-	super(null, 500);
+        super(null, 500);
 
-	if (owner.isRemoved()) {
-	    super.matchRunning = false;
-	    return;
-	}
+        if (owner.isRemoved()) {
+            super.matchRunning = false;
+            return;
+        }
 
-	if (owner instanceof Npc) {
-	    Npc npc = (Npc) owner;
-	    loc = npc.getLoc();
+        if (owner instanceof Npc) {
+            Npc npc = (Npc) owner;
+            loc = npc.getLoc();
 
-	    if (affectedMob.getX() < (loc.minX() - 4) || affectedMob.getX() > (loc.maxX() + 4) || affectedMob.getY() < (loc.minY() - 4) || affectedMob.getY() > (loc.maxY() + 4)) {
-		super.matchRunning = false;
-		return;
-	    }
-	}
+            if (affectedMob.getX() < (loc.minX() - 4) || affectedMob.getX() > (loc.maxX() + 4) || affectedMob.getY() < (loc.minY() - 4) || affectedMob.getY() > (loc.maxY() + 4)) {
+                super.matchRunning = false;
+                return;
+            }
+        }
 
-	this.owner = owner;
-	owner.setPath(new Path(owner.getX(), owner.getY(), affectedMob.getX(), affectedMob.getY()));
+        this.owner = owner;
+        owner.setPath(new Path(owner.getX(), owner.getY(), affectedMob.getX(), affectedMob.getY()));
 
-	this.affectedMob = affectedMob;
-	this.radius = radius;
+        this.affectedMob = affectedMob;
+        this.radius = radius;
 
-	if (owner.withinRange(affectedMob, radius)) {
-	    arrived();
-	    super.matchRunning = false;
-	    return;
-	}
+        if (owner.withinRange(affectedMob, radius)) {
+            arrived();
+            super.matchRunning = false;
+            return;
+        }
 
-	startTime = System.currentTimeMillis();
+        startTime = System.currentTimeMillis();
     }
 
     public abstract void arrived();
@@ -51,42 +51,42 @@ public abstract class WalkMobToMobEvent extends DelayedEvent {
     }
 
     public Mob getAffectedMob() {
-	return affectedMob;
+        return affectedMob;
     }
 
     public final void run() {
-	if (owner.isRemoved()) {
-	    super.matchRunning = false;
-	    return;
-	}
+        if (owner.isRemoved()) {
+            super.matchRunning = false;
+            return;
+        }
 
-	if (owner.withinRange(affectedMob, radius))
-	    arrived();
-	else if (owner.hasMoved())
-	    return; // We're still moving
-	else {
-	    if (System.currentTimeMillis() - startTime <= 10000) // Make NPCs
-	    // give a 10
-	    // second
-	    // chase
-	    {
-		if (loc != null) {
-		    if (affectedMob.getX() < (loc.minX() - 4) || affectedMob.getX() > (loc.maxX() + 4) || affectedMob.getY() < (loc.minY() - 4) || affectedMob.getY() > (loc.maxY() + 4)) {
-			super.matchRunning = false;
-			failed();
-			return;
-		    }
-		}
+        if (owner.withinRange(affectedMob, radius))
+            arrived();
+        else if (owner.hasMoved())
+            return; // We're still moving
+        else {
+            if (System.currentTimeMillis() - startTime <= 10000) // Make NPCs
+            // give a 10
+            // second
+            // chase
+            {
+                if (loc != null) {
+                    if (affectedMob.getX() < (loc.minX() - 4) || affectedMob.getX() > (loc.maxX() + 4) || affectedMob.getY() < (loc.minY() - 4) || affectedMob.getY() > (loc.maxY() + 4)) {
+                        super.matchRunning = false;
+                        failed();
+                        return;
+                    }
+                }
 
-		if (owner.isBusy())
-		    return;
+                if (owner.isBusy())
+                    return;
 
-		owner.setPath(new Path(owner.getX(), owner.getY(), affectedMob.getX(), affectedMob.getY()));
-		return;
-	    } else
-		failed();
-	}
+                owner.setPath(new Path(owner.getX(), owner.getY(), affectedMob.getX(), affectedMob.getY()));
+                return;
+            } else
+                failed();
+        }
 
-	super.matchRunning = false;
+        super.matchRunning = false;
     }
 }

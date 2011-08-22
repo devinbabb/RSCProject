@@ -4,9 +4,8 @@ import rscproject.gs.model.Player;
 
 /**
  * a Damager (Player) that adds to a pool (Syndicate) of an NPC
- * 
+ *
  * @author Devin
- * 
  */
 public class Damager {
 
@@ -32,47 +31,47 @@ public class Damager {
     private boolean useRanged = false;
 
     public int getDamage() {
-	return damage;
+        return damage;
     }
 
     public void setDamage(int damage) {
-	this.damage = damage;
+        this.damage = damage;
     }
 
     public Player getPlayer() {
-	return player;
+        return player;
     }
 
     public void setPlayer(Player player) {
-	this.player = player;
+        this.player = player;
     }
 
     public boolean isUseCombat() {
-	return useCombat;
+        return useCombat;
     }
 
     public void setUseCombat(boolean useCombat) {
-	this.useCombat = useCombat;
+        this.useCombat = useCombat;
     }
 
     public boolean isUseMagic() {
-	return useMagic;
+        return useMagic;
     }
 
     public void setUseMagic(boolean useMagic) {
-	this.useMagic = useMagic;
+        this.useMagic = useMagic;
     }
 
     public boolean isUseRanged() {
-	return useRanged;
+        return useRanged;
     }
 
     public void setUseRanged(boolean useRanged) {
-	this.useRanged = useRanged;
+        this.useRanged = useRanged;
     }
 
     public Damager(Player p) {
-	this.player = p;
+        this.player = p;
     }
 
 }

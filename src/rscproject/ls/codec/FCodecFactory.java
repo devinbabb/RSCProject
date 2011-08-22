@@ -20,19 +20,19 @@ public class FCodecFactory implements ProtocolCodecFactory {
 
     /**
      * Provides the decoder to use to format outgoing data.
-     * 
+     *
      * @return A protocol decoder
      */
     public ProtocolDecoder getDecoder() {
-	return decoder;
+        return decoder;
     }
 
     /**
      * Provides the encoder to use to parse incoming data.
-     * 
+     *
      * @return A protocol encoder
      */
     public ProtocolEncoder getEncoder() {
-	return encoder;
+        return encoder;
     }
 }

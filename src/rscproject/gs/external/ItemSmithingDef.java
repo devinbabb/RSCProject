@@ -19,18 +19,18 @@ public class ItemSmithingDef {
     public int level;
 
     public int getAmount() {
-	return amount;
+        return amount;
     }
 
     public int getItemID() {
-	return itemID;
+        return itemID;
     }
 
     public int getRequiredBars() {
-	return bars;
+        return bars;
     }
 
     public int getRequiredLevel() {
-	return level;
+        return level;
     }
 }

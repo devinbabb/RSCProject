@@ -2,11 +2,7 @@ package rscproject.gs.builders.ls;
 
 import rscproject.gs.builders.LSPacketBuilder;
 import rscproject.gs.connection.LSPacket;
-import rscproject.gs.model.Bank;
-import rscproject.gs.model.InvItem;
-import rscproject.gs.model.Inventory;
-import rscproject.gs.model.Player;
-import rscproject.gs.model.PlayerAppearance;
+import rscproject.gs.model.*;
 import rscproject.gs.tools.DataConversions;
 
 /**
@@ -14,80 +10,80 @@ import rscproject.gs.tools.DataConversions;
  */
 
 public class SavePacketBuilder {
-	/**
-	 * Player to save
-	 */
-	private Player player;
+    /**
+     * Player to save
+     */
+    private Player player;
 
-	public LSPacket getPacket() {
-		
-		LSPacketBuilder packet = new LSPacketBuilder();
-		packet.setID(20);
-		packet.addLong(player.getUsernameHash());
-		packet.addInt(player.getOwner());
+    public LSPacket getPacket() {
 
-		packet
-				.addLong(player.getLastLogin() == 0L
-						&& player.isChangingAppearance() ? 0 : player
-						.getCurrentLogin());
-		packet.addLong(DataConversions.IPToLong(player.getCurrentIP()));
-		packet.addShort(player.getCombatLevel());
-		packet.addShort(player.getSkillTotal());
-		packet.addShort(player.getX());
-		packet.addShort(player.getY());
-		packet.addShort(player.getFatigue());
+        LSPacketBuilder packet = new LSPacketBuilder();
+        packet.setID(20);
+        packet.addLong(player.getUsernameHash());
+        packet.addInt(player.getOwner());
 
-		PlayerAppearance a = player.getPlayerAppearance();
-		packet.addByte((byte) a.getHairColour());
-		packet.addByte((byte) a.getTopColour());
-		packet.addByte((byte) a.getTrouserColour());
-		packet.addByte((byte) a.getSkinColour());
-		packet.addByte((byte) a.getSprite(0));
-		packet.addByte((byte) a.getSprite(1));
+        packet
+                .addLong(player.getLastLogin() == 0L
+                        && player.isChangingAppearance() ? 0 : player
+                        .getCurrentLogin());
+        packet.addLong(DataConversions.IPToLong(player.getCurrentIP()));
+        packet.addShort(player.getCombatLevel());
+        packet.addShort(player.getSkillTotal());
+        packet.addShort(player.getX());
+        packet.addShort(player.getY());
+        packet.addShort(player.getFatigue());
 
-		packet.addByte((byte) (player.isMale() ? 1 : 0));
-		packet.addLong(player.getSkullTime());
-		packet.addByte((byte) player.getCombatStyle());
+        PlayerAppearance a = player.getPlayerAppearance();
+        packet.addByte((byte) a.getHairColour());
+        packet.addByte((byte) a.getTopColour());
+        packet.addByte((byte) a.getTrouserColour());
+        packet.addByte((byte) a.getSkinColour());
+        packet.addByte((byte) a.getSprite(0));
+        packet.addByte((byte) a.getSprite(1));
 
-		for (int i = 0; i < 18; i++) {
-			packet.addLong(player.getExp(i));
-			packet.addShort(player.getCurStat(i));
-		}
+        packet.addByte((byte) (player.isMale() ? 1 : 0));
+        packet.addLong(player.getSkullTime());
+        packet.addByte((byte) player.getCombatStyle());
 
-		Inventory inv = player.getInventory();
-		packet.addShort(inv.size());
-		for (InvItem i : inv.getItems()) {
-			packet.addShort(i.getID());
-			packet.addInt(i.getAmount());
-			packet.addByte((byte) (i.isWielded() ? 1 : 0));
-		}
+        for (int i = 0; i < 18; i++) {
+            packet.addLong(player.getExp(i));
+            packet.addShort(player.getCurStat(i));
+        }
 
-		Bank bnk = player.getBank();
-		packet.addShort(bnk.size());
-		for (InvItem i : bnk.getItems()) {
-			packet.addShort(i.getID());
-			packet.addInt(i.getAmount());
-		}
+        Inventory inv = player.getInventory();
+        packet.addShort(inv.size());
+        for (InvItem i : inv.getItems()) {
+            packet.addShort(i.getID());
+            packet.addInt(i.getAmount());
+            packet.addByte((byte) (i.isWielded() ? 1 : 0));
+        }
 
-		packet.addShort(player.getQuestPoints());
-		java.util.HashMap<Integer, Integer> questStage = (java.util.HashMap<Integer, Integer>) player
-				.getQuestStages().clone();
+        Bank bnk = player.getBank();
+        packet.addShort(bnk.size());
+        for (InvItem i : bnk.getItems()) {
+            packet.addShort(i.getID());
+            packet.addInt(i.getAmount());
+        }
 
-		packet.addShort(questStage.size());
-		java.util.Set<Integer> set = questStage.keySet();
+        packet.addShort(player.getQuestPoints());
+        java.util.HashMap<Integer, Integer> questStage = (java.util.HashMap<Integer, Integer>) player
+                .getQuestStages().clone();
 
-		for (int i : set) {
-			packet.addShort(i);
-			packet.addShort(questStage.get(i));
-		}
-                packet.addLong(player.getEventCD());
-		return packet.toPacket();
-	}
+        packet.addShort(questStage.size());
+        java.util.Set<Integer> set = questStage.keySet();
 
-	/**
-	 * Sets the player to save
-	 */
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
+        for (int i : set) {
+            packet.addShort(i);
+            packet.addShort(questStage.get(i));
+        }
+        packet.addLong(player.getEventCD());
+        return packet.toPacket();
+    }
+
+    /**
+     * Sets the player to save
+     */
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }

@@ -18,21 +18,21 @@ public abstract class MenuHandler {
      * Creates a new MenuHandler with the given options
      */
     public MenuHandler(String[] options) {
-	this.options = options;
+        this.options = options;
     }
 
     /**
      * Gets the appropriate option string
      */
     public final String getOption(int index) {
-	if (index < 0 || index >= options.length) {
-	    return null;
-	}
-	return options[index];
+        if (index < 0 || index >= options.length) {
+            return null;
+        }
+        return options[index];
     }
 
     public final String[] getOptions() {
-	return options;
+        return options;
     }
 
     /**
@@ -44,6 +44,6 @@ public abstract class MenuHandler {
      * Set the Player this MenuHandler is responsible for
      */
     public final void setOwner(Player owner) {
-	this.owner = owner;
+        this.owner = owner;
     }
 }

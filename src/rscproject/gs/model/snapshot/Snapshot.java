@@ -3,25 +3,25 @@ package rscproject.gs.model.snapshot;
 
 /**
  * Snapshot abstract class
- * @author Pets
  *
+ * @author Pets
  */
 public abstract class Snapshot {
 
-	private long eventTime;
-	protected String owner;
+    private long eventTime;
+    protected String owner;
 
-	public Snapshot(String owner) {
-		this.owner = owner;
-		this.eventTime = System.currentTimeMillis();
+    public Snapshot(String owner) {
+        this.owner = owner;
+        this.eventTime = System.currentTimeMillis();
 
-	}
+    }
 
-	public long getTimestamp() {
-		return eventTime;
-	}
+    public long getTimestamp() {
+        return eventTime;
+    }
 
-	public String getOwner() {
-		return owner;
-	}
+    public String getOwner() {
+        return owner;
+    }
 }

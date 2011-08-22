@@ -53,76 +53,76 @@ public class AgilityDef {
      * @return if you can fail this def
      */
     public boolean canFail() {
-	return canFail;
+        return canFail;
     }
 
     /**
      * @return the xp you get for doing this agility object
      */
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     /**
      * @return the fail x coord we go to if we fail
      */
     public int getFailX() {
-	return failX;
+        return failX;
     }
 
     /**
      * @return the fail y coord we go to if we fail
      */
     public int getFailY() {
-	return failY;
+        return failY;
     }
 
     /**
      * @return the object's message
      */
     public String getMessage() {
-	return message;
+        return message;
     }
 
     /**
      * @return the order of this agility object
      */
     public int getOrder() {
-	return order;
+        return order;
     }
 
     /**
      * @return this def's required level
      */
     public int getReqLevel() {
-	return reqLevel;
+        return reqLevel;
     }
 
     /**
      * @return this def's tele x
      */
     public int getToX() {
-	return toX;
+        return toX;
     }
 
     /**
      * @return this def's tele y
      */
     public int getToY() {
-	return toY;
+        return toY;
     }
 
     /**
      * @return this def's x coord
      */
     public int getX() {
-	return x;
+        return x;
     }
 
     /**
      * @return this def's y coord
      */
     public int getY() {
-	return y;
+        return y;
     }
 }

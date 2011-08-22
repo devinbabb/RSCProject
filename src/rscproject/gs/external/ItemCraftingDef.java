@@ -15,14 +15,14 @@ public class ItemCraftingDef {
     public int requiredLvl;
 
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     public int getItemID() {
-	return itemID;
+        return itemID;
     }
 
     public int getReqLevel() {
-	return requiredLvl;
+        return requiredLvl;
     }
 }

@@ -1,7 +1,6 @@
 package rscproject.gs.phandler.ls;
 
 import org.apache.mina.common.IoSession;
-
 import rscproject.gs.Instance;
 import rscproject.gs.builders.ls.PlayerListRequestPacketBuilder;
 import rscproject.gs.connection.LSPacket;
@@ -22,13 +21,13 @@ public class PlayerListRequestHandler implements PacketHandler {
     private PlayerListRequestPacketBuilder builder = new PlayerListRequestPacketBuilder();
 
     public void handlePacket(Packet p, IoSession session) throws Exception {
-	long uID = ((LSPacket) p).getUID();
-	Logger.event("LOGIN_SERVER requested player list (uID: " + uID + ")");
-	builder.setUID(uID);
-	LSPacket temp = builder.getPacket();
-	if (temp != null) {
-	    session.write(temp);
-	}
+        long uID = ((LSPacket) p).getUID();
+        Logger.event("LOGIN_SERVER requested player list (uID: " + uID + ")");
+        builder.setUID(uID);
+        LSPacket temp = builder.getPacket();
+        if (temp != null) {
+            session.write(temp);
+        }
     }
 
 }

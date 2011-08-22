@@ -19,15 +19,15 @@ public class ObjectFishDef {
     public int requiredLevel;
 
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     public int getId() {
-	return fishId;
+        return fishId;
     }
 
     public int getReqLevel() {
-	return requiredLevel;
+        return requiredLevel;
     }
 
 }

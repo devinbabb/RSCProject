@@ -31,40 +31,40 @@ public class NPCLoc {
     public int startY;
 
     public NPCLoc(int id, int startX, int startY, int minX, int maxX, int minY, int maxY) {
-	this.id = id;
-	this.startX = startX;
-	this.startY = startY;
-	this.minX = minX;
-	this.maxX = maxX;
-	this.minY = minY;
-	this.maxY = maxY;
+        this.id = id;
+        this.startX = startX;
+        this.startY = startY;
+        this.minX = minX;
+        this.maxX = maxX;
+        this.minY = minY;
+        this.maxY = maxY;
     }
 
     public int getId() {
-	return id;
+        return id;
     }
 
     public int maxX() {
-	return maxX;
+        return maxX;
     }
 
     public int maxY() {
-	return maxY;
+        return maxY;
     }
 
     public int minX() {
-	return minX;
+        return minX;
     }
 
     public int minY() {
-	return minY;
+        return minY;
     }
 
     public int startX() {
-	return startX;
+        return startX;
     }
 
     public int startY() {
-	return startY;
+        return startY;
     }
 }

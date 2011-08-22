@@ -1,7 +1,6 @@
 package rscproject.gs.phandler.client;
 
 import org.apache.mina.common.IoSession;
-
 import rscproject.gs.Instance;
 import rscproject.gs.connection.Packet;
 import rscproject.gs.model.World;

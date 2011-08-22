@@ -19,15 +19,15 @@ public class ItemHerbDef {
     public int requiredLvl;
 
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     public int getPotionId() {
-	return potionId;
+        return potionId;
     }
 
     public int getReqLevel() {
-	return requiredLvl;
+        return requiredLvl;
     }
 
 }

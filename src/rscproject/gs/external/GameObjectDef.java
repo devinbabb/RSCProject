@@ -34,30 +34,30 @@ public class GameObjectDef extends EntityDef {
     public int width;
 
     public String getCommand1() {
-	return command1.toLowerCase();
+        return command1.toLowerCase();
     }
 
     public String getCommand2() {
-	return command2.toLowerCase();
+        return command2.toLowerCase();
     }
 
     public int getGroundItemVar() {
-	return groundItemVar;
+        return groundItemVar;
     }
 
     public int getHeight() {
-	return height;
+        return height;
     }
 
     public String getObjectModel() {
-	return objectModel;
+        return objectModel;
     }
 
     public int getType() {
-	return type;
+        return type;
     }
 
     public int getWidth() {
-	return width;
+        return width;
     }
 }

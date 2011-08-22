@@ -19,14 +19,14 @@ public class ItemGemDef {
     public int requiredLvl;
 
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     public int getGemID() {
-	return gemID;
+        return gemID;
     }
 
     public int getReqLevel() {
-	return requiredLvl;
+        return requiredLvl;
     }
 }

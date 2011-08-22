@@ -23,19 +23,19 @@ public class ItemCookingDef {
     public int requiredLvl;
 
     public int getBurnedId() {
-	return burnedId;
+        return burnedId;
     }
 
     public int getCookedId() {
-	return cookedId;
+        return cookedId;
     }
 
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     public int getReqLevel() {
-	return requiredLvl;
+        return requiredLvl;
     }
 
 }

@@ -19,15 +19,15 @@ public class ItemUnIdentHerbDef {
     public int requiredLvl;
 
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     public int getLevelRequired() {
-	return requiredLvl;
+        return requiredLvl;
     }
 
     public int getNewId() {
-	return newId;
+        return newId;
     }
 
 }

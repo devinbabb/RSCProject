@@ -15,16 +15,16 @@ public class Bubble {
     private Player owner;
 
     public Bubble(Player owner, int itemID) {
-	this.owner = owner;
-	this.itemID = itemID;
+        this.owner = owner;
+        this.itemID = itemID;
     }
 
     public int getID() {
-	return itemID;
+        return itemID;
     }
 
     public Player getOwner() {
-	return owner;
+        return owner;
     }
 
 }

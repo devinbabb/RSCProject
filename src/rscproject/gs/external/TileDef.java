@@ -6,14 +6,14 @@ public class TileDef {
     public int unknown;
 
     public int getColour() {
-	return colour;
+        return colour;
     }
 
     public int getObjectType() {
-	return objectType;
+        return objectType;
     }
 
     public int getUnknown() {
-	return unknown;
+        return unknown;
     }
 }

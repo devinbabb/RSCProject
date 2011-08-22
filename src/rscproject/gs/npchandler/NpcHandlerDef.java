@@ -2,6 +2,7 @@ package rscproject.gs.npchandler;
 
 /**
  * The definition of a npc handler, for use with XStream.
+ *
  * @author Devin
  */
 public class NpcHandlerDef {
@@ -17,33 +18,31 @@ public class NpcHandlerDef {
     /**
      * Constructs a new packet handler definition, entailing that npcs with the
      * given IDs are to be handled by the specified class.
-     * 
-     * @param ids
-     *            The IDs of npcs to be handled
-     * @param className
-     *            The name of the packet handler class
+     *
+     * @param ids       The IDs of npcs to be handled
+     * @param className The name of the packet handler class
      */
     public NpcHandlerDef(int[] ids, String className) {
-	this.ids = ids;
-	this.className = className;
+        this.ids = ids;
+        this.className = className;
     }
 
     /**
      * Returns the IDs of npcs to be handled.
-     * 
+     *
      * @return An <code>int</code> array containing the IDs of npcs to be
      *         handled.
      */
     public int[] getAssociatedNpcs() {
-	return ids;
+        return ids;
     }
 
     /**
      * Returns the name of the npc handler class.
-     * 
+     *
      * @return The name of the npc handler's class
      */
     public String getClassName() {
-	return className;
+        return className;
     }
 }

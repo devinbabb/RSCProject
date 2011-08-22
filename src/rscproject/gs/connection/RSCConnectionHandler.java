@@ -1,14 +1,9 @@
 package rscproject.gs.connection;
 
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.util.Map;
-
 import org.apache.mina.common.IdleStatus;
 import org.apache.mina.common.IoHandler;
 import org.apache.mina.common.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
-
 import rscproject.config.Constants;
 import rscproject.gs.Instance;
 import rscproject.gs.core.GameEngine;
@@ -16,8 +11,13 @@ import rscproject.gs.model.Player;
 import rscproject.gs.model.World;
 import rscproject.gs.util.Logger;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.util.Map;
+
 /**
  * Handles the protocol events fired from MINA.
+ *
  * @author Devin
  */
 public class RSCConnectionHandler implements IoHandler {
@@ -47,19 +47,18 @@ public class RSCConnectionHandler implements IoHandler {
 
     /**
      * Creates a new connection handler for the given engine.
-     * 
-     * @param engine
-     *            The engine in use
+     *
+     * @param engine The engine in use
      */
     public RSCConnectionHandler(GameEngine engine) {
-	packets = (PacketQueue<RSCPacket>) engine.getPacketQueue();
-	this.allowedInterval = allowedInterval;
-	/*
-	clients = Collections.synchronizedMap(new HashMap<InetAddress, Long>());
-	counts = Collections.synchronizedMap(new HashMap<InetAddress, Integer>());
-	written = Collections.synchronizedMap(new HashMap<InetAddress, Integer>());
-	connectedAddresses = new HashSet<InetAddress>();
-	*/
+        packets = (PacketQueue<RSCPacket>) engine.getPacketQueue();
+        this.allowedInterval = allowedInterval;
+        /*
+      clients = Collections.synchronizedMap(new HashMap<InetAddress, Long>());
+      counts = Collections.synchronizedMap(new HashMap<InetAddress, Integer>());
+      written = Collections.synchronizedMap(new HashMap<InetAddress, Integer>());
+      connectedAddresses = new HashSet<InetAddress>();
+      */
     }
 
     /*
@@ -72,39 +71,37 @@ public class RSCConnectionHandler implements IoHandler {
 	clients.put(getAddress(session), d);
     }
 	*/
+
     /**
      * Invoked whenever an exception is thrown by MINA or this IoHandler.
-     * 
-     * @param session
-     *            The associated session
-     * @param cause
-     *            The exception thrown
+     *
+     * @param session The associated session
+     * @param cause   The exception thrown
      */
     public void exceptionCaught(IoSession session, Throwable cause) {
-	Player p = (Player) session.getAttachment();
-	// if(p.getUsername().equalsIgnoreCase("xent")) {
+        Player p = (Player) session.getAttachment();
+        // if(p.getUsername().equalsIgnoreCase("xent")) {
 
-	// }
-	if(p != null)
-		p.getActionSender().sendLogout();
-	session.close();
-	/*
-	 * System.out.println("---MINA Error from: " + p.getUsername() +
-	 * " -------"); cause.printStackTrace();System.out.println(
-	 * "------------------------------------------------------------");
-	 */
-	cause.printStackTrace();
+        // }
+        if (p != null)
+            p.getActionSender().sendLogout();
+        session.close();
+        /*
+       * System.out.println("---MINA Error from: " + p.getUsername() +
+       * " -------"); cause.printStackTrace();System.out.println(
+       * "------------------------------------------------------------");
+       */
+        cause.printStackTrace();
     }
 
     private InetAddress getAddress(IoSession io) {
-	return ((InetSocketAddress) io.getRemoteAddress()).getAddress();
+        return ((InetSocketAddress) io.getRemoteAddress()).getAddress();
     }
-
 
 
     /**
      * Method responsible for deciding if a connection is OK to continue
-     * 
+     *
      * @param session
      *            The new session that will be verified
      * @return True if the session meets the criteria, otherwise false (if
@@ -193,40 +190,37 @@ public class RSCConnectionHandler implements IoHandler {
 	}
     }
     */
+
     /**
      * Invoked whenever a packet is ready to be added to the queue.
-     * 
-     * @param session
-     *            The IO session on which the packet was received
-     * @param message
-     *            The packet
+     *
+     * @param session The IO session on which the packet was received
+     * @param message The packet
      */
     public void messageReceived(IoSession session, Object message) {
-	Player player = (Player) session.getAttachment();
-	if (session.isClosing() || player.destroyed()) {
-	    return;
-	}
-	RSCPacket p = (RSCPacket) message;
+        Player player = (Player) session.getAttachment();
+        if (session.isClosing() || player.destroyed()) {
+            return;
+        }
+        RSCPacket p = (RSCPacket) message;
 
-	/* if(p.getID() == 57 || p.getID() == 73 || p.getID() == 40 || p.getID()
-	 == 51 || p.getID() == 128 || p.getID() == 206 || p.getID() == 71 ||
-	 p.getID() == 55)*/
-	
-	if(p.getID() == 55)
-	    player.addInterval();
-	
+        /* if(p.getID() == 57 || p.getID() == 73 || p.getID() == 40 || p.getID()
+       == 51 || p.getID() == 128 || p.getID() == 206 || p.getID() == 71 ||
+       p.getID() == 55)*/
 
-	player.addPacket(p);
-		packets.add(p);
+        if (p.getID() == 55)
+            player.addInterval();
+
+
+        player.addPacket(p);
+        packets.add(p);
     }
 
     /**
      * Invoked whenever a packet is sent.
-     * 
-     * @param session
-     *            The associated session
-     * @param message
-     *            The packet sent
+     *
+     * @param session The associated session
+     * @param message The packet sent
      */
     public void messageSent(IoSession session, Object message) {
     }
@@ -234,70 +228,65 @@ public class RSCConnectionHandler implements IoHandler {
     /**
      * Invoked whenever an IO session is closed. This must handle unregistering
      * the disconnecting player from the engine.
-     * 
-     * @param session
-     *            The IO session which has been closed
+     *
+     * @param session The IO session which has been closed
      */
     public void sessionClosed(IoSession session) {
-	Player player = (Player) session.getAttachment();
-	if (!player.destroyed()) {
-	    player.destroy(false);
-	}
+        Player player = (Player) session.getAttachment();
+        if (!player.destroyed()) {
+            player.destroy(false);
+        }
     }
 
     public void sessionCreated(IoSession session) {
-	/*
-    if (!isConnectionOk(session)) {
-	    session.close();
-	    return;
-	} else {
-	    connectionOk(session);
-	}
-	*/
-	session.getFilterChain().addFirst("protocolFilter", new ProtocolCodecFilter(new RSCCodecFactory()));
-	// Logger.event("Connection from: " +
-	// ((InetSocketAddress)session.getRemoteAddress()).getAddress().getHostAddress());
-	Logger.println("Connection from: " + ((InetSocketAddress) session.getRemoteAddress()).getAddress().getHostAddress());
+        /*
+      if (!isConnectionOk(session)) {
+          session.close();
+          return;
+      } else {
+          connectionOk(session);
+      }
+      */
+        session.getFilterChain().addFirst("protocolFilter", new ProtocolCodecFilter(new RSCCodecFactory()));
+        // Logger.event("Connection from: " +
+        // ((InetSocketAddress)session.getRemoteAddress()).getAddress().getHostAddress());
+        Logger.println("Connection from: " + ((InetSocketAddress) session.getRemoteAddress()).getAddress().getHostAddress());
     }
 
     /**
      * Invoked when the idle status of a session changes.
-     * 
-     * @param session
-     *            The session in question
-     * @param status
-     *            The new idle status
+     *
+     * @param session The session in question
+     * @param status  The new idle status
      */
     public void sessionIdle(IoSession session, IdleStatus status) {
-	Player player = (Player) session.getAttachment();
-	if (!player.destroyed()) {
-	    player.destroy(false);
-	}
-	session.close();
+        Player player = (Player) session.getAttachment();
+        if (!player.destroyed()) {
+            player.destroy(false);
+        }
+        session.close();
     }
 
     /**
      * Invoked when a new session is opened.
-     * 
-     * @param session
-     *            The session opened
+     *
+     * @param session The session opened
      */
     public void sessionOpened(IoSession session) {
-	Constants.GameServer.ACCEPTED_CONNECTIONS++;
-	session.setAttachment(new Player(session));
-	session.setIdleTime(IdleStatus.BOTH_IDLE, 30);
-	session.setWriteTimeout(30);
+        Constants.GameServer.ACCEPTED_CONNECTIONS++;
+        session.setAttachment(new Player(session));
+        session.setIdleTime(IdleStatus.BOTH_IDLE, 30);
+        session.setWriteTimeout(30);
     }
 
     /**
      * Sets the interval between connections from a client. This value is
      * measured in milliseconds.
-     * 
-     * @param allowedInterval
-     *            The number of milliseconds a client is allowed to wait before
-     *            making another successful connection
+     *
+     * @param allowedInterval The number of milliseconds a client is allowed to wait before
+     *                        making another successful connection
      */
     public void setAllowedInterval(long allowedInterval) {
-	this.allowedInterval = allowedInterval;
+        this.allowedInterval = allowedInterval;
     }
 }

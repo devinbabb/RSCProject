@@ -15,11 +15,11 @@ public class ReqOreDef {
     public int oreId;
 
     public int getAmount() {
-	return amount;
+        return amount;
     }
 
     public int getId() {
-	return oreId;
+        return oreId;
     }
 
 }

@@ -1,17 +1,17 @@
 package rscproject.gs.quest;
 
-import java.util.Iterator;
-import java.util.Vector;
-
 import rscproject.gs.event.DelayedEvent;
 import rscproject.gs.model.Player;
 import rscproject.gs.util.Logger;
 
+import java.util.Iterator;
+import java.util.Vector;
+
 /**
  * Version: 17/5/2009
- * 
+ * <p/>
  * Handles QuestEvents and their queues and accessor/manipulator methods
- * 
+ *
  * @author punKrockeR, Luke
  */
 public final class QuestEventManager {
@@ -26,55 +26,55 @@ public final class QuestEventManager {
      * Contructs a new QuestEvent handler with the given initial array size
      */
     public QuestEventManager(int initialCapacity) {
-	toAdd = new Vector<QuestEvent>(initialCapacity);
-	events = new Vector<QuestEvent>(initialCapacity);
+        toAdd = new Vector<QuestEvent>(initialCapacity);
+        events = new Vector<QuestEvent>(initialCapacity);
     }
 
     /**
      * @return if the event handler contains the given event
      */
     public boolean contains(DelayedEvent event) {
-	return events.contains(event);
+        return events.contains(event);
     }
 
     /**
      * @return the list of existing events
      */
     public Vector<QuestEvent> getEvents() {
-	return events;
+        return events;
     }
 
     /**
      * Adds the given event to the queue
-     * 
+     * <p/>
      * TODO: Make sure this is bugless
      */
     public void add(QuestEvent event) {
-	if (!events.contains(event) && !toAdd.contains(event))
-	    toAdd.add(event);
+        if (!events.contains(event) && !toAdd.contains(event))
+            toAdd.add(event);
     }
 
     /**
      * Removes the given event from the list
      */
     public void remove(QuestEvent event) {
-	events.remove(event);
+        events.remove(event);
     }
 
     /**
      * Removes any of the given player's events
      */
     public void removePlayersEvents(Player player) {
-	try {
-	    Iterator<QuestEvent> iterator = events.iterator();
-	    while (iterator.hasNext()) {
-		QuestEvent event = iterator.next();
-		if (event.belongsTo(player))
-		    iterator.remove();
-	    }
-	} catch (Exception e) {
-		Logger.println("Error @ removePlayer, IP address: " + player.getCurrentIP() + " Name: " + player.getUsername() + " message : " + e.getMessage());
-	}
+        try {
+            Iterator<QuestEvent> iterator = events.iterator();
+            while (iterator.hasNext()) {
+                QuestEvent event = iterator.next();
+                if (event.belongsTo(player))
+                    iterator.remove();
+            }
+        } catch (Exception e) {
+            Logger.println("Error @ removePlayer, IP address: " + player.getCurrentIP() + " Name: " + player.getUsername() + " message : " + e.getMessage());
+        }
 
     }
 
@@ -82,43 +82,43 @@ public final class QuestEventManager {
      * Processes all the events in the queues
      */
     public void process() {
-	if (!running)
-	    return;
+        if (!running)
+            return;
 
-	try {
-	    if (toAdd.size() > 0) {
-		events.addAll(toAdd);
-		toAdd.clear();
-	    }
+        try {
+            if (toAdd.size() > 0) {
+                events.addAll(toAdd);
+                toAdd.clear();
+            }
 
-	    Iterator<QuestEvent> iterator = events.iterator();
-	    while (iterator.hasNext()) {
-		QuestEvent event = iterator.next();
+            Iterator<QuestEvent> iterator = events.iterator();
+            while (iterator.hasNext()) {
+                QuestEvent event = iterator.next();
 
-		if (event == null) {
-		    iterator.remove();
-		    continue;
-		}
+                if (event == null) {
+                    iterator.remove();
+                    continue;
+                }
 
-		if (event.shouldRun()) {
-		    event.run();
-		    event.updateLastRun();
-		}
+                if (event.shouldRun()) {
+                    event.run();
+                    event.updateLastRun();
+                }
 
-		if (event.shouldRemove())
-		    iterator.remove();
-	    }
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
+                if (event.shouldRemove())
+                    iterator.remove();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Kills this event manager
      */
     public void kill() {
-	running = false;
-	toAdd.clear();
-	events.clear();
+        running = false;
+        toAdd.clear();
+        events.clear();
     }
 }

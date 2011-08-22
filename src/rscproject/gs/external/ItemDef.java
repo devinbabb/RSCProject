@@ -38,38 +38,38 @@ public class ItemDef extends EntityDef {
     public int wieldable;
 
     public boolean canTrade() {
-	return trade;
+        return trade;
     }
 
     public int getBasePrice() {
-	return basePrice;
+        return basePrice;
     }
 
     public String getCommand() {
-	return command;
+        return command;
     }
 
     public String getCommandType() {
-	return wieldable == 16 ? "Wield" : "Wear";
+        return wieldable == 16 ? "Wield" : "Wear";
     }
 
     public int getPictureMask() {
-	return mask;
+        return mask;
     }
 
     public int getSprite() {
-	return sprite;
+        return sprite;
     }
 
     public boolean isMembers() {
-	return members;
+        return members;
     }
 
     public boolean isStackable() {
-	return stackable;
+        return stackable;
     }
 
     public boolean isWieldable() {
-	return wieldable > 0;
+        return wieldable > 0;
     }
 }

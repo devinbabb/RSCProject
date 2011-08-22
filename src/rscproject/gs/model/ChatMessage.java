@@ -21,30 +21,30 @@ public class ChatMessage {
     private Mob sender;
 
     public ChatMessage(Mob sender, byte[] message) {
-	this.sender = sender;
-	this.message = message;
+        this.sender = sender;
+        this.message = message;
     }
 
     public ChatMessage(Mob sender, String message, Mob recipient) {
-	this.sender = sender;
-	this.message = DataConversions.stringToByteArray(message);
-	this.recipient = recipient;
+        this.sender = sender;
+        this.message = DataConversions.stringToByteArray(message);
+        this.recipient = recipient;
     }
 
     public int getLength() {
-	return message.length;
+        return message.length;
     }
 
     public byte[] getMessage() {
-	return message;
+        return message;
     }
 
     public Mob getRecipient() {
-	return recipient;
+        return recipient;
     }
 
     public Mob getSender() {
-	return sender;
+        return sender;
     }
 
 }

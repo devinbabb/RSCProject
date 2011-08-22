@@ -19,14 +19,14 @@ public class ItemDartTipDef {
     public int requiredLvl;
 
     public int getDartID() {
-	return dartID;
+        return dartID;
     }
 
     public double getExp() {
-	return exp;
+        return exp;
     }
 
     public int getReqLevel() {
-	return requiredLvl;
+        return requiredLvl;
     }
 }

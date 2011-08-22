@@ -1,17 +1,11 @@
 package rscproject.gs;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.util.concurrent.Executors;
-
 import org.apache.mina.common.IoAcceptor;
 import org.apache.mina.common.IoAcceptorConfig;
 import org.apache.mina.common.ThreadModel;
 import org.apache.mina.transport.socket.nio.SocketAcceptor;
 import org.apache.mina.transport.socket.nio.SocketAcceptorConfig;
 import org.apache.mina.transport.socket.nio.SocketSessionConfig;
-
 import rscproject.config.Config;
 import rscproject.config.Constants;
 import rscproject.gs.connection.RSCConnectionHandler;
@@ -23,8 +17,14 @@ import rscproject.gs.model.World;
 import rscproject.gs.util.Logger;
 import rscproject.irc.IRC;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.util.concurrent.Executors;
+
 /**
  * The entry point for RSC server.
+ *
  * @author Devin
  */
 public class Server {
@@ -35,35 +35,35 @@ public class Server {
     private static World world = null;
 
     public static void main(String[] args) throws IOException {
-	String configFile = "conf/server/Conf.xml";
-	if (args.length > 0) {
-	    File f = new File(args[0]);
-	    if (f.exists()) {
-		configFile = f.getName();
-	    }
-	}
-	
+        String configFile = "conf/server/Conf.xml";
+        if (args.length > 0) {
+            File f = new File(args[0]);
+            if (f.exists()) {
+                configFile = f.getName();
+            }
+        }
 
-	if (args[2] != null && args[2].equalsIgnoreCase("no"))
-	    Constants.IRC.USE_IRC = false;
-	
-	Constants.GameServer.MEMBER_WORLD = args[1].equalsIgnoreCase("p2p");
-	Constants.GameServer.MOTD = "@yel@Welcome to @whi@" + Constants.GameServer.SERVER_NAME + "@yel@ - World @whi@" + (Constants.GameServer.WORLD_NUMBER == 0 ? 2 : Constants.GameServer.WORLD_NUMBER) + " (" + (Constants.GameServer.MEMBER_WORLD ? "P2P" : "F2P") + ")";
-	
-	world = Instance.getWorld();
-	world.wl.loadObjects();
 
-	Config.initConfig(configFile);
-	World.initilizeDB();
-	World.initilizeMinigames();
-	
-	Logger.println(Constants.GameServer.SERVER_NAME + " [" + (Constants.GameServer.MEMBER_WORLD ? "P2P" : "F2P") + "] " + "Server starting up...");
-	
-	new Server();
+        if (args[2] != null && args[2].equalsIgnoreCase("no"))
+            Constants.IRC.USE_IRC = false;
+
+        Constants.GameServer.MEMBER_WORLD = args[1].equalsIgnoreCase("p2p");
+        Constants.GameServer.MOTD = "@yel@Welcome to @whi@" + Constants.GameServer.SERVER_NAME + "@yel@ - World @whi@" + (Constants.GameServer.WORLD_NUMBER == 0 ? 2 : Constants.GameServer.WORLD_NUMBER) + " (" + (Constants.GameServer.MEMBER_WORLD ? "P2P" : "F2P") + ")";
+
+        world = Instance.getWorld();
+        world.wl.loadObjects();
+
+        Config.initConfig(configFile);
+        World.initilizeDB();
+        World.initilizeMinigames();
+
+        Logger.println(Constants.GameServer.SERVER_NAME + " [" + (Constants.GameServer.MEMBER_WORLD ? "P2P" : "F2P") + "] " + "Server starting up...");
+
+        new Server();
     }
 
     public static boolean isMembers() {
-	return Constants.GameServer.MEMBER_WORLD;
+        return Constants.GameServer.MEMBER_WORLD;
     }
 
     /**
@@ -84,51 +84,51 @@ public class Server {
     private IRC irc;
 
     public IoAcceptor getAcceptor() {
-	return acceptor;
+        return acceptor;
     }
 
     public void setAcceptor(IoAcceptor acceptor) {
-	this.acceptor = acceptor;
+        this.acceptor = acceptor;
     }
 
     public LoginConnector getConnector() {
-	return connector;
+        return connector;
     }
 
     public void setConnector(LoginConnector connector) {
-	this.connector = connector;
+        this.connector = connector;
     }
 
     public IRC getIRC() {
-	return irc;
+        return irc;
     }
 
     public void setIRC(IRC irc) {
-	this.irc = irc;
+        this.irc = irc;
     }
 
     public boolean isRunning() {
-	return running;
+        return running;
     }
 
     public void setRunning(boolean running) {
-	this.running = running;
+        this.running = running;
     }
 
     public DelayedEvent getUpdateEvent() {
-	return updateEvent;
+        return updateEvent;
     }
 
     public void setUpdateEvent(DelayedEvent updateEvent) {
-	this.updateEvent = updateEvent;
+        this.updateEvent = updateEvent;
     }
 
     public static World getWorld() {
-	return world;
+        return world;
     }
 
     public void setEngine(GameEngine engine) {
-	this.engine = engine;
+        this.engine = engine;
     }
 
     /**
@@ -146,112 +146,112 @@ public class Server {
      * prepares the server socket to accept connections.
      */
     public Server() {
-	running = true;
-	world.setServer(this);
-	irc = new IRC();
-	if (Constants.IRC.USE_IRC) {
-	    new Thread(irc).start();
-	} else {
-	    Logger.println("IRC is disabled");
-	}
-	try {
-	    Instance.getPluginHandler().initPlugins();
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-	try {
-	    connector = new LoginConnector();
-	    engine = new GameEngine();
-	    engine.start();
-	    while (!connector.isRegistered()) {
-		Thread.sleep(100);
-	    }
+        running = true;
+        world.setServer(this);
+        irc = new IRC();
+        if (Constants.IRC.USE_IRC) {
+            new Thread(irc).start();
+        } else {
+            Logger.println("IRC is disabled");
+        }
+        try {
+            Instance.getPluginHandler().initPlugins();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            connector = new LoginConnector();
+            engine = new GameEngine();
+            engine.start();
+            while (!connector.isRegistered()) {
+                Thread.sleep(100);
+            }
 
-	    acceptor = new SocketAcceptor(Runtime.getRuntime().availableProcessors() + 1, Executors.newCachedThreadPool());
-	    IoAcceptorConfig config = new SocketAcceptorConfig();
-	    config.setDisconnectOnUnbind(true);
+            acceptor = new SocketAcceptor(Runtime.getRuntime().availableProcessors() + 1, Executors.newCachedThreadPool());
+            IoAcceptorConfig config = new SocketAcceptorConfig();
+            config.setDisconnectOnUnbind(true);
 
-	    config.setThreadModel(ThreadModel.MANUAL);
-	    SocketSessionConfig ssc = (SocketSessionConfig) config.getSessionConfig();
-	    ssc.setSendBufferSize(10000);
-	    ssc.setReceiveBufferSize(10000);
-	    acceptor.bind(new InetSocketAddress(Config.SERVER_IP, Config.SERVER_PORT), new RSCConnectionHandler(engine), config);
+            config.setThreadModel(ThreadModel.MANUAL);
+            SocketSessionConfig ssc = (SocketSessionConfig) config.getSessionConfig();
+            ssc.setSendBufferSize(10000);
+            ssc.setReceiveBufferSize(10000);
+            acceptor.bind(new InetSocketAddress(Config.SERVER_IP, Config.SERVER_PORT), new RSCConnectionHandler(engine), config);
 
-	} catch (Exception e) {
-	    Logger.error(e);
-	}
+        } catch (Exception e) {
+            Logger.error(e);
+        }
     }
 
     /**
      * Returns the game engine for this server
      */
     public GameEngine getEngine() {
-	return engine;
+        return engine;
     }
 
     public LoginConnector getLoginConnector() {
-	return connector;
+        return connector;
     }
 
     public boolean isInitialized() {
-	return engine != null && connector != null;
+        return engine != null && connector != null;
     }
 
     /**
      * Kills the game engine and irc engine
-     * 
+     *
      * @throws InterruptedException
      */
     public void kill() {
-	Logger.print(Constants.GameServer.SERVER_NAME + " shutting down...");
-	running = false;
-	engine.emptyWorld();
-	connector.kill();
-	if (Constants.IRC.USE_IRC) {
-	    Instance.getIRC().disconnect();
-	    Instance.getIRC().dispose();
-	}
-	System.exit(0);
+        Logger.print(Constants.GameServer.SERVER_NAME + " shutting down...");
+        running = false;
+        engine.emptyWorld();
+        connector.kill();
+        if (Constants.IRC.USE_IRC) {
+            Instance.getIRC().disconnect();
+            Instance.getIRC().dispose();
+        }
+        System.exit(0);
 
     }
 
     public boolean running() {
-	return running;
+        return running;
     }
 
     /**
      * Shutdown the server in 60 seconds
      */
     public boolean shutdownForUpdate() {
-	if (updateEvent != null) {
-	    return false;
-	}
-	updateEvent = new SingleEvent(null, 59000) {
-	    public void action() {
-		kill();
-	    }
-	};
-	Instance.getDelayedEventHandler().add(updateEvent);
-	return true;
+        if (updateEvent != null) {
+            return false;
+        }
+        updateEvent = new SingleEvent(null, 59000) {
+            public void action() {
+                kill();
+            }
+        };
+        Instance.getDelayedEventHandler().add(updateEvent);
+        return true;
     }
 
     /**
      * MS till the server shuts down
      */
     public int timeTillShutdown() {
-	if (updateEvent == null) {
-	    return -1;
-	}
-	return updateEvent.timeTillNextRun();
+        if (updateEvent == null) {
+            return -1;
+        }
+        return updateEvent.timeTillNextRun();
     }
 
     /**
      * Unbinds the socket acceptor
      */
     public void unbind() {
-	try {
-	    acceptor.unbindAll();
-	} catch (Exception e) {
-	}
+        try {
+            acceptor.unbindAll();
+        } catch (Exception e) {
+        }
     }
 }

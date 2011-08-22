@@ -1,7 +1,6 @@
 package rscproject.gs.phandler;
 
 import org.apache.mina.common.IoSession;
-
 import rscproject.gs.connection.Packet;
 
 public interface PacketHandler {

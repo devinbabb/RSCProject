@@ -10,40 +10,41 @@ import rscproject.irc.IRC;
 
 /**
  * Holds instances to commonly used Objects.
+ *
  * @author Devin, xEnt
  */
 public class Instance {
 
     public static IRC getIRC() {
-    	return getServer().getIRC();
+        return getServer().getIRC();
     }
 
     public static Server getServer() {
-    	return World.getWorld().getServer();
+        return World.getWorld().getServer();
     }
 
     public static World getWorld() {
-    	return World.getWorld();
+        return World.getWorld();
     }
 
     public static DelayedEventHandler getDelayedEventHandler() {
-    	return getWorld().getDelayedEventHandler();
+        return getWorld().getDelayedEventHandler();
     }
 
     public static CacheHandler getCacheHandler() {
-    	return CacheHandler.getCache();
+        return CacheHandler.getCache();
     }
 
     public static PluginHandler getPluginHandler() {
-    	return PluginHandler.getPluginHandler();
+        return PluginHandler.getPluginHandler();
     }
-    
+
     public static ReportHandlerQueries getReport() {
-    	return DBConnection.getReport();
+        return DBConnection.getReport();
     }
 
     public static CTF getCTF() {
-    	return World.getCtf();
+        return World.getCtf();
     }
 
 }

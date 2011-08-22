@@ -19,14 +19,14 @@ public class ItemArrowHeadDef {
     public int requiredLvl;
 
     public int getArrowID() {
-	return arrowID;
+        return arrowID;
     }
 
     public double getExp() {
-	return exp;
+        return exp;
     }
 
     public int getReqLevel() {
-	return requiredLvl;
+        return requiredLvl;
     }
 }

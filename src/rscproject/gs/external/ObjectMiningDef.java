@@ -23,19 +23,19 @@ public class ObjectMiningDef {
     public int respawnTime;
 
     public int getExp() {
-	return exp;
+        return exp;
     }
 
     public int getOreId() {
-	return oreId;
+        return oreId;
     }
 
     public int getReqLevel() {
-	return requiredLvl;
+        return requiredLvl;
     }
 
     public int getRespawnTime() {
-	return respawnTime;
+        return respawnTime;
     }
 
 }

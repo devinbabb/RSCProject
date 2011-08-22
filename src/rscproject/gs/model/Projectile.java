@@ -19,21 +19,21 @@ public class Projectile {
     private Mob victim;
 
     public Projectile(Mob caster, Mob victim, int type) {
-	this.caster = caster;
-	this.victim = victim;
-	this.type = type;
+        this.caster = caster;
+        this.victim = victim;
+        this.type = type;
     }
 
     public Mob getCaster() {
-	return caster;
+        return caster;
     }
 
     public int getType() {
-	return type;
+        return type;
     }
 
     public Mob getVictim() {
-	return victim;
+        return victim;
     }
 
 }

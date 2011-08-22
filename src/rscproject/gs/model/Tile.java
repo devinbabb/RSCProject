@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 
 /**
  * A representation of one tile within our world map
+ *
  * @author Devin
  */
 public class Tile {
@@ -12,20 +13,20 @@ public class Tile {
      * Create a new tile from raw data packed into the given ByteBuffer
      */
     public static Tile unpack(ByteBuffer in) throws IOException {
-	if (in.remaining() < 10) {
-	    throw new IOException("Provided buffer too short");
-	}
-	Tile tile = new Tile();
+        if (in.remaining() < 10) {
+            throw new IOException("Provided buffer too short");
+        }
+        Tile tile = new Tile();
 
-	tile.groundElevation = in.get();
-	tile.groundTexture = in.get();
-	tile.groundOverlay = in.get();
-	tile.roofTexture = in.get();
-	tile.horizontalWall = in.get();
-	tile.verticalWall = in.get();
-	tile.diagonalWalls = in.getInt();
+        tile.groundElevation = in.get();
+        tile.groundTexture = in.get();
+        tile.groundOverlay = in.get();
+        tile.roofTexture = in.get();
+        tile.horizontalWall = in.get();
+        tile.verticalWall = in.get();
+        tile.diagonalWalls = in.getInt();
 
-	return tile;
+        return tile;
     }
 
     /**
@@ -67,18 +68,18 @@ public class Tile {
      * Writes the Tile raw data into a ByteBuffer
      */
     public ByteBuffer pack() throws IOException {
-	ByteBuffer out = ByteBuffer.allocate(10);
+        ByteBuffer out = ByteBuffer.allocate(10);
 
-	out.put(groundElevation);
-	out.put(groundTexture);
-	out.put(groundOverlay);
-	out.put(roofTexture);
+        out.put(groundElevation);
+        out.put(groundTexture);
+        out.put(groundOverlay);
+        out.put(roofTexture);
 
-	out.put(horizontalWall);
-	out.put(verticalWall);
-	out.putInt(diagonalWalls);
+        out.put(horizontalWall);
+        out.put(verticalWall);
+        out.putInt(diagonalWalls);
 
-	out.flip();
-	return out;
+        out.flip();
+        return out;
     }
 }
