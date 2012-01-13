@@ -1,14 +1,14 @@
 package rscproject.ls.model;
 
 public class InvItem extends Item {
-    private boolean wielded;
+	private boolean wielded;
 
-    public InvItem(int id, int amount, boolean wielded) {
-        super(id, amount);
-        this.wielded = wielded;
-    }
+	public InvItem(int id, int amount, boolean wielded) {
+		super(id, amount);
+		this.wielded = wielded;
+	}
 
-    public boolean isWielded() {
-        return wielded;
-    }
+	public boolean isWielded() {
+		return wielded;
+	}
 }

@@ -2,13 +2,13 @@ package rscproject.gs.model.mini;
 
 /**
  * Data each player gets cached.
- *
+ * 
  * @author xEnt
  */
 public class Cache {
 
-    public boolean muted = false;
-    public boolean inRed = false;
-    public boolean inBlue = false;
+	public boolean muted = false;
+	public boolean inRed = false;
+	public boolean inBlue = false;
 
 }

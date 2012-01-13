@@ -13,21 +13,21 @@ import rscproject.gs.phandler.PacketHandler;
  */
 
 public class FriendLogin implements PacketHandler {
-    /**
-     * World instance
-     */
-    public static final World world = Instance.getWorld();
+	/**
+	 * World instance
+	 */
+	public static final World world = Instance.getWorld();
 
-    public void handlePacket(Packet p, IoSession session) throws Exception {
-        long uID = ((LSPacket) p).getUID();
-        Player player = world.getPlayer(p.readLong());
-        if (player == null) {
-            return;
-        }
-        long friend = p.readLong();
-        if (player.isFriendsWith(friend)) {
-            player.getActionSender().sendFriendUpdate(friend, p.readShort());
-        }
-    }
+	public void handlePacket(Packet p, IoSession session) throws Exception {
+		long uID = ((LSPacket) p).getUID();
+		Player player = world.getPlayer(p.readLong());
+		if (player == null) {
+			return;
+		}
+		long friend = p.readLong();
+		if (player.isFriendsWith(friend)) {
+			player.getActionSender().sendFriendUpdate(friend, p.readShort());
+		}
+	}
 
 }

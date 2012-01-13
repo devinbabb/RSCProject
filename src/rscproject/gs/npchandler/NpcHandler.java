@@ -8,5 +8,5 @@ import rscproject.gs.model.Player;
  */
 
 public interface NpcHandler {
-    public void handleNpc(final Npc npc, Player player) throws Exception;
+	public void handleNpc(final Npc npc, Player player) throws Exception;
 }

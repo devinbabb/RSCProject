@@ -5,9 +5,9 @@ package rscproject.gs.model;
  */
 
 public class TelePoint extends Point {
-    public String command;
+	public String command;
 
-    public String getCommand() {
-        return command;
-    }
+	public String getCommand() {
+		return command;
+	}
 }
