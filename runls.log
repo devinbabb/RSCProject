@@ -1,0 +1,31 @@
+Login Server starting up...
+Communications link failure due to underlying exception: 
+
+** BEGIN NESTED EXCEPTION ** 
+
+java.net.SocketException
+MESSAGE: java.net.ConnectException: Connection refused
+
+STACKTRACE:
+
+java.net.SocketException: java.net.ConnectException: Connection refused
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:156)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:284)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2565)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1485)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:266)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:200)
+	at rscproject.ls.net.DatabaseConnection.createConnection(DatabaseConnection.java:65)
+	at rscproject.ls.net.DatabaseConnection.<init>(DatabaseConnection.java:48)
+	at rscproject.ls.Server.main(Server.java:58)
+
+
+** END NESTED EXCEPTION **
+
+
+
+Last packet sent to the server was 8 ms ago.
+java.lang.Exception: Unable to connect to MySQL
+	at rscproject.ls.net.DatabaseConnection.<init>(DatabaseConnection.java:49)
+	at rscproject.ls.Server.main(Server.java:58)
