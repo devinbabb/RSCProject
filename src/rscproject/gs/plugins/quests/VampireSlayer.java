@@ -1,3 +1,5 @@
+package rscproject.gs.plugins.quests;
+
 import rscproject.gs.event.SingleEvent;
 import rscproject.gs.model.MenuHandler;
 import rscproject.gs.model.Npc;

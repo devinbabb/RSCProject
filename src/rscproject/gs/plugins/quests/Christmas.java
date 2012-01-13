@@ -1,3 +1,5 @@
+package rscproject.gs.plugins.quests;
+
 import rscproject.gs.Instance;
 import rscproject.gs.external.EntityHandler;
 import rscproject.gs.external.ItemDropDef;
