@@ -9,23 +9,23 @@ import rscproject.ls.packetbuilder.FPacketBuilder;
 import rscproject.ls.packethandler.PacketHandler;
 
 public class Update implements PacketHandler {
-    private static final FPacketBuilder builder = new FPacketBuilder();
+	private static final FPacketBuilder builder = new FPacketBuilder();
 
-    public void handlePacket(Packet p, IoSession session) throws Exception {
-        String[] params = ((FPacket) p).getParameters();
-        try {
-            String reason = params[0];
-            for (World w : Server.getServer().getWorlds()) {
-                w.getActionSender().update(reason);
-            }
-            builder.setID(1);
-        } catch (Exception e) {
-            builder.setID(0);
-        }
-        FPacket packet = builder.toPacket();
-        if (packet != null) {
-            session.write(packet);
-        }
-    }
+	public void handlePacket(Packet p, IoSession session) throws Exception {
+		String[] params = ((FPacket) p).getParameters();
+		try {
+			String reason = params[0];
+			for (World w : Server.getServer().getWorlds()) {
+				w.getActionSender().update(reason);
+			}
+			builder.setID(1);
+		} catch (Exception e) {
+			builder.setID(0);
+		}
+		FPacket packet = builder.toPacket();
+		if (packet != null) {
+			session.write(packet);
+		}
+	}
 
 }

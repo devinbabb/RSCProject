@@ -4,10 +4,10 @@ import rscproject.gs.model.Player;
 
 public abstract class ShortEvent extends SingleEvent {
 
-    public ShortEvent(Player owner) {
-        super(owner, 1500);
-    }
+	public ShortEvent(Player owner) {
+		super(owner, 1500);
+	}
 
-    public abstract void action();
+	public abstract void action();
 
 }

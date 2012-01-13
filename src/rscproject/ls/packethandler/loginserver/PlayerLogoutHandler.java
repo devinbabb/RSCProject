@@ -11,9 +11,9 @@ import rscproject.ls.packethandler.PacketHandler;
 
 public class PlayerLogoutHandler implements PacketHandler {
 
-    public void handlePacket(Packet p, IoSession session) throws Exception {
-        long user = p.readLong();
-        World world = (World) session.getAttachment();
-        world.unregisterPlayer(user);
-    }
+	public void handlePacket(Packet p, IoSession session) throws Exception {
+		long user = p.readLong();
+		World world = (World) session.getAttachment();
+		world.unregisterPlayer(user);
+	}
 }
