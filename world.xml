@@ -11,7 +11,7 @@
 	<entry key="servernum">3</entry>
 	<entry key="lsip">localhost</entry>
 	<entry key="lsport">34526</entry>
-	<entry key="mysqluser">rscproject</entry>
-	<entry key="mysqlpass">passhere</entry>
+	<entry key="mysqluser">root</entry>
+	<entry key="mysqlpass">publictest</entry>
 	<entry key="mysqlhost">localhost</entry>	
 </properties>

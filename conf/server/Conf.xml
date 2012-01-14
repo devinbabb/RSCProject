@@ -3,7 +3,7 @@
 <properties>
 	<comment>RSCD Config</comment>
 	<entry key="version">27</entry>
-	<entry key="ip">208.110.86.234</entry>
+	<entry key="ip">localhost</entry>
 	<entry key="port">43595</entry>
 	<entry key="name">RSCProject</entry>
 	<entry key="location">London</entry>
